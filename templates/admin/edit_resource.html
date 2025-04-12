@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h2>Edit Resource</h2>
+        </div>
+        <div class="card-body">
+            <form id="resourceForm" method="POST" action="{{ url_for('admin.update_resource', resource_id=resource.id) }}" enctype="multipart/form-data">
+                <div class="row mb-3">
+                    <div class="col-md-8">
+                        <label class="form-label">Title</label>
+                        <input type="text" class="form-control" name="title" value="{{ resource.title }}" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Subject</label>
+                        <select class="form-select" name="subject" required>
+                            <option value="">Select Subject</option>
+                            <option value="mathematics" {{ 'selected' if resource.subject == 'mathematics' else '' }}>Mathematics</option>
+                            <option value="physics" {{ 'selected' if resource.subject == 'physics' else '' }}>Physics</option>
+                            <option value="chemistry" {{ 'selected' if resource.subject == 'chemistry' else '' }}>Chemistry</option>
+                            <option value="biology" {{ 'selected' if resource.subject == 'biology' else '' }}>Biology</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label class="form-label">Resource Type</label>
+                        <select class="form-select" name="resource_type" id="resourceType" required>
+                            <option value="document" {{ 'selected' if resource.resource_type == 'document' else '' }}>Document</option>
+                            <option value="video" {{ 'selected' if resource.resource_type == 'video' else '' }}>Video</option>
+                            <option value="link" {{ 'selected' if resource.resource_type == 'link' else '' }}>External Link</option>
+                            <option value="interactive" {{ 'selected' if resource.resource_type == 'interactive' else '' }}>Interactive Content</option>
+                        </select>
+                    </div>
+                    <div class="col-md-8">
+                        <label class="form-label">Tags</label>
+                        <input type="text" class="form-control" name="tags" value="{{ resource.tags }}" placeholder="Comma-separated tags">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-control" name="description" rows="3">{{ resource.description }}</textarea>
+                </div>
+
+                <div id="fileUploadSection" class="mb-3 {{ 'd-none' if resource.resource_type in ['link', 'video'] else '' }}">
+                    <label class="form-label">Upload File</label>
+                    <input type="file" class="form-control" name="file">
+                    <small class="text-muted">Leave empty to keep existing file. Supported formats: PDF, DOCX, PPTX, MP4, etc.</small>
+                    {% if resource.file_path %}
+                    <div class="mt-2">
+                        <strong>Current file:</strong> {{ resource.file_path.split('/')[-1] }}
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div id="urlSection" class="mb-3 {{ '' if resource.resource_type in ['link', 'video'] else 'd-none' }}">
+                    <label class="form-label">Resource URL</label>
+                    <input type="url" class="form-control" name="url" value="{{ resource.url }}" placeholder="https://...">
+                </div>
+
+                <div class="mt-4">
+                    <a href="{{ url_for('admin.resources') }}" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-primary">Update Resource</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Toggle file/URL input based on resource type
+    document.getElementById('resourceType').addEventListener('change', function(e) {
+        const fileSection = document.getElementById('fileUploadSection');
+        const urlSection = document.getElementById('urlSection');
+        
+        if (e.target.value === 'link' || e.target.value === 'video') {
+            fileSection.classList.add('d-none');
+            urlSection.classList.remove('d-none');
+        } else {
+            fileSection.classList.remove('d-none');
+            urlSection.classList.add('d-none');
+        }
+    });
+});
+</script>
+{% endblock %} 

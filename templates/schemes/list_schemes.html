@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+.scheme-card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.scheme-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+
+.scheme-header {
+    background: linear-gradient(45deg, #4e73df, #6f86e2);
+    color: white;
+    padding: 15px;
+    border-radius: 15px 15px 0 0;
+}
+
+.scheme-header.physics {
+    background: linear-gradient(45deg, #4e73df, #6f86e2);
+}
+
+.scheme-header.chemistry {
+    background: linear-gradient(45deg, #1cc88a, #36e3ac);
+}
+
+.scheme-header.mathematics {
+    background: linear-gradient(45deg, #36b9cc, #4dd4e7);
+}
+
+.scheme-header.biology {
+    background: linear-gradient(45deg, #f6c23e, #f8d065);
+}
+
+.scheme-body {
+    padding: 20px;
+}
+
+.scheme-info {
+    margin-bottom: 10px;
+    color: #666;
+}
+
+.scheme-info i {
+    width: 20px;
+    color: #4e73df;
+    margin-right: 8px;
+}
+
+.scheme-actions {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: #dc3545;
+    padding: 0;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.delete-btn:hover {
+    color: #bd2130;
+}
+</style>
+
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Schemes of Work</h1>
+        <a href="{{ url_for('schemes.create_scheme') }}" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Create New Scheme
+        </a>
+    </div>
+
+    <div class="row">
+        {% for scheme in schemes %}
+        <div class="col-md-6" id="scheme-{{ scheme.id }}">
+            <div class="card scheme-card">
+                <div class="scheme-header {{ scheme.subject.lower() }}">
+                    <h5 class="mb-0">{{ scheme.title }}</h5>
+                </div>
+                <div class="scheme-body">
+                    <div class="scheme-info">
+                        <p><i class="fas fa-book"></i> Subject: {{ scheme.subject }}</p>
+                        <p><i class="fas fa-graduation-cap"></i> Grade Level: {{ scheme.grade_level }}</p>
+                        <p><i class="fas fa-calendar"></i> Term: {{ scheme.term }}</p>
+                    </div>
+                    <div class="scheme-actions">
+                        <a href="{{ url_for('schemes.view_scheme', scheme_id=scheme.id) }}" 
+                           class="btn btn-sm btn-primary">
+                            <i class="fas fa-eye"></i> View Details
+                        </a>
+                        <button onclick="deleteScheme({{ scheme.id }})" 
+                                class="delete-btn">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-12 text-center">
+            <div class="py-5">
+                <i class="fas fa-folder-open fa-4x text-muted mb-3"></i>
+                <h4 class="text-muted">No schemes created yet</h4>
+                <a href="{{ url_for('schemes.create_scheme') }}" class="btn btn-primary mt-3">
+                    Create Your First Scheme
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+function deleteScheme(schemeId) {
+    if (confirm('Are you sure you want to delete this scheme?')) {
+        fetch(`/schemes/${schemeId}/delete`, {
+            method: 'DELETE',
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                // Remove the scheme card from the DOM
+                document.getElementById(`scheme-${schemeId}`).remove();
+                
+                // Show success message
+                const alertDiv = document.createElement('div');
+                alertDiv.className = 'alert alert-success alert-dismissible fade show';
+                alertDiv.innerHTML = `
+                    Scheme deleted successfully
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                `;
+                document.querySelector('.container').insertBefore(alertDiv, document.querySelector('.row'));
+            } else {
+                alert('Error deleting scheme: ' + data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error deleting scheme');
+        });
+    }
+}
+</script>
+{% endblock %} 

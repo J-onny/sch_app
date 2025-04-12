@@ -1,0 +1,84 @@
+[
+  {
+    "class": "Senior 3",
+    "term": "2",
+    "theme": "Waves",
+    "topic": "Sound Waves",
+    "competency": "The learner should be able to describe the nature of sound waves and how they are transmitted by vibrations in a medium.",
+    "learning_outcomes": [
+      {
+        "description": "understand that sound is an example of a wave form that requires a medium through which to travel, and determine its velocity in air by the echo method (k, s)",
+        "assessment_type": ["observation", "evaluation of products"]
+      }
+    ],
+    "suggested_learning_activities": [
+      "In pairs, learners plan, carry out and report on investigations, using tuning forks to: show how sound is produced as a form of energy, making observations relating to vibrations, loudness, and pitch, explore the transmission of sound through air, water and different solids, explaining transmission in terms of density and particle theory",
+      "In groups, learners plan, carry out and report on investigations to find the velocity of sound in air over 50+ metres, using the echo method, and explain the reasons for the outcomes."
+    ],
+    "sample_assessment_strategy": [
+      "Observe and listen to pairs and groups engaged in investigations; posing questions to ensure understanding and the correct use of terms.",
+      "Evaluate quality of learning and progress towards the learning outcomes through assessment of investigation reports."
+    ],
+    "periods": 14,
+    "note": "The concept of resonance and vibrations in strings and pipes should be left out."
+  },
+  {
+    "class": "Senior 3",
+    "term": "3",
+    "theme": "Earth and Space Physics",
+    "topic": "Stars and Galaxies",
+    "competency": "The learner should be able to understand the life-cycle of stars and the source of their energy.",
+    "learning_outcomes": [
+      {
+        "description": "know the source of energy in stars and appreciate the importance of the energy produced by the sun to the people on Earth (k, u)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "appreciate that stars vary in colour and brightness (u)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "know that stars have life cycles and that the fate of stars (white dwarfs, neutron stars and black holes) depends on their initial size (k, u)",
+        "assessment_type": ["observation", "evaluation of products"]
+      }
+    ],
+    "suggested_learning_activities": [
+      "In pairs, learners research and explain in a diagram: how the sun produces the energy needed for life to survive, that the sun is a relatively small star which will eventually become a red giant, and then a white dwarf, the approximate amount of energy produced by the sun per second, the proportion of the sun’s energy reaching the Earth’s surface and the proportion of that which is captured for photosynthesis",
+      "In pairs, learners research, explain, and report on: the variation in colour and brightness of stars in the Milky Way in terms of their size and distance from Earth, the different stages in the life cycle of a star, how the nuclear reactions that provide the energy in stars change as they grow older, and that they get hotter, what neutron stars and black holes are and how they were formed, what a supernova is and how it arises"
+    ],
+    "sample_assessment_strategy": [
+      "Listen to learners as they research and discuss the nature of stars and the source of energy; posing questions to deepen learning and secure understanding.",
+      "Observe groups and intervene appropriately to guide their work.",
+      "Assess products to ensure all are making progress towards achievement of learning outcomes."
+    ],
+    "ict_support": "The learner can use Internet research to study the formation of stars and galaxies",
+    "periods": 14
+  },
+  {
+    "class": "Senior 3",
+    "term": "3",
+    "theme": "Earth and Space Physics",
+    "topic": "Satellites and Communication",
+    "competency": "The learner should be able to explain what artificial satellites are and how they are applied in space exploration and other fields.",
+    "learning_outcomes": [
+      {
+        "description": "understand what artificial satellites are and how we make use of them in research and in everyday life (u, s)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "appreciate the importance of space exploration (u, v/a)",
+        "assessment_type": ["observation", "evaluation of products"]
+      }
+    ],
+    "suggested_learning_activities": [
+      "In pairs, learners research and report on types of artificial satellite, particularly geostationary satellites and explain: how they are used in GPS navigation systems, the value of photographs such as those taken by the Hubble Space Telescope., the purpose of the International Space Station and its role in space exploration"
+    ],
+    "sample_assessment_strategy": [
+      "Observe and listen to learners as they research and discuss satellites, offering guidance to deepen learning.",
+      "Assess learning through quality of reports and intervene appropriately to ensure that all are making progress towards achievement of learning outcomes."
+    ],
+    "ict_support": "The learner can use the Internet to obtain images of satellites and how they work.",
+    "periods": 14
+  }
+]
+

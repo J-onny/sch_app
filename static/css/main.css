@@ -1,0 +1,68 @@
+/* Add these styles to fix dropdown positioning */
+.form-select {
+    position: relative;
+    z-index: 1;
+}
+
+.modal {
+    z-index: 1050;
+}
+
+.modal-dialog {
+    z-index: 1055;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    z-index: 1060 !important;
+    width: 100%;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+/* Ensure proper containment */
+.form-group, .mb-3 {
+    position: relative;
+}
+
+/* Fix select height and overflow */
+select.form-select {
+    height: auto !important;
+    max-height: 38px;
+    overflow: hidden;
+}
+
+select.form-select:focus {
+    overflow: auto;
+}
+
+/* Improve dropdown visual hierarchy */
+.form-select option {
+    padding: 8px 12px;
+    background: white;
+}
+
+.form-select option:hover {
+    background-color: #f8f9fa;
+}
+
+/* Fix container positioning */
+.dropdown {
+    position: relative;
+}
+
+/* Improve dropdown appearance */
+.dropdown-item {
+    padding: 8px 15px;
+    cursor: pointer;
+}
+
+/* Add dropdown shadow for better visibility */
+.dropdown-menu {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+} 

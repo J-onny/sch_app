@@ -1,0 +1,495 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Question Bank Management</h1>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#questionModal">
+            <i class="bi bi-plus-circle me-2"></i>Add Question
+        </button>
+    </div>
+
+    <!-- Filters -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form class="row g-3" id="filterForm">
+                <div class="col-md-3">
+                    <select class="form-select" name="subject" id="subjectFilter">
+                        <option value="">All Subjects</option>
+                        <option value="mathematics">Mathematics</option>
+                        <option value="physics">Physics</option>
+                        <option value="chemistry">Chemistry</option>
+                        <option value="biology">Biology</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <select class="form-select" name="grade_level" id="gradeFilter">
+                        <option value="">All Grades</option>
+                        <option value="senior1">Senior 1</option>
+                        <option value="senior2">Senior 2</option>
+                        <option value="senior3">Senior 3</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <select class="form-select" name="question_type" id="typeFilter">
+                        <option value="">All Types</option>
+                        <option value="mcq">Multiple Choice</option>
+                        <option value="short_answer">Short Answer</option>
+                        <option value="long_answer">Long Answer</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <select class="form-select" name="difficulty" id="difficultyFilter">
+                        <option value="">All Difficulties</option>
+                        <option value="easy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search questions..." id="searchInput">
+                        <button class="btn btn-outline-secondary" type="submit">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Questions Table -->
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Question</th>
+                            <th>Subject</th>
+                            <th>Grade</th>
+                            <th>Type</th>
+                            <th>Difficulty</th>
+                            <th>Usage Count</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for question in questions %}
+                        <tr>
+                            <td>{{ question.content|truncate(50) }}</td>
+                            <td>{{ question.subject|title }}</td>
+                            <td>{{ question.grade_level|title }}</td>
+                            <td>
+                                <span class="badge bg-{{ 'primary' if question.question_type == 'mcq'
+                                                    else 'success' if question.question_type == 'short_answer'
+                                                    else 'warning' }}">
+                                    {{ question.question_type|replace('_', ' ')|title }}
+                                </span>
+                            </td>
+                            <td>
+                                <span class="badge bg-{{ 'success' if question.difficulty == 'easy'
+                                                    else 'warning' if question.difficulty == 'medium'
+                                                    else 'danger' }}">
+                                    {{ question.difficulty|title }}
+                                </span>
+                            </td>
+                            <td>{{ question.usage_count }}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <button class="btn btn-sm btn-outline-primary" onclick="previewQuestion({{ question.id }})">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                    <form method="GET" action="{{ url_for('questions.edit_question', question_id=question.id) }}" class="d-inline">
+                                        <button type="submit" class="btn btn-sm btn-outline-secondary">
+                                            <i class="bi bi-pencil"></i>
+                                        </button>
+                                    </form>
+                                    <button class="btn btn-sm btn-outline-danger" onclick="deleteQuestion({{ question.id }})">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            {% if questions %}
+            <nav class="mt-3">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item {{ 'disabled' if not has_prev }}">
+                        <a class="page-link" href="{{ url_for('questions.question_bank', page=page-1) }}">Previous</a>
+                    </li>
+                    <li class="page-item disabled">
+                        <span class="page-link">Page {{ page }} of {{ total_pages }}</span>
+                    </li>
+                    <li class="page-item {{ 'disabled' if not has_next }}">
+                        <a class="page-link" href="{{ url_for('questions.question_bank', page=page+1) }}">Next</a>
+                    </li>
+                </ul>
+            </nav>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Question Preview Modal -->
+<div class="modal fade" id="previewModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Question Preview</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="previewContent">
+                <!-- Question content will be loaded here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add/Edit Question Modal -->
+<div class="modal fade" id="questionModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">Add Question</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="questionForm" method="POST" action="{{ url_for('questions.create_question') }}" onsubmit="return prepareFormData()">
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Subject</label>
+                            <select class="form-select" name="subject" id="subjectSelect" required 
+                                    onchange="this.form.action='{{ url_for('questions.question_bank') }}'; this.form.method='GET'; this.form.submit();">
+                                <option value="">Select Subject</option>
+                                {% for subject in subjects %}
+                                <option value="{{ subject }}" {% if subject == selected_subject %}selected{% endif %}>
+                                    {{ subject }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Grade Level</label>
+                            <select class="form-select" name="grade_level" id="gradeSelect" required 
+                                    {% if not selected_subject %}disabled{% endif %}
+                                    onchange="this.form.action='{{ url_for('questions.question_bank') }}'; this.form.method='GET'; this.form.submit();">
+                                <option value="">Select Grade</option>
+                                {% if grades %}
+                                    {% for grade in grades %}
+                                    <option value="{{ grade }}" {% if grade == selected_grade %}selected{% endif %}>
+                                        {{ grade|replace('_', ' ')|title }}
+                                    </option>
+                                    {% endfor %}
+                                {% endif %}
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Topic</label>
+                            <select class="form-select" name="topic" id="topicSelect" required 
+                                    {% if not selected_grade %}disabled{% endif %}>
+                                <option value="">Select Topic</option>
+                                {% if topics %}
+                                    {% for topic in topics %}
+                                    <option value="{{ topic }}">{{ topic }}</option>
+                                    {% endfor %}
+                                {% endif %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Difficulty</label>
+                            <select class="form-select" name="difficulty" required>
+                                <option value="easy">Easy</option>
+                                <option value="medium">Medium</option>
+                                <option value="hard">Hard</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Question Type</label>
+                            <select class="form-select" name="question_type" id="questionType" required>
+                                <option value="mcq">Multiple Choice</option>
+                                <option value="short_answer">Short Answer</option>
+                                <option value="long_answer">Long Answer</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Question Content -->
+                    <div class="mb-3">
+                        <label class="form-label">Question Content</label>
+                        <div class="mb-3">
+                            <div class="input-group">
+                                <input type="file" class="form-control" id="fileUpload" accept="application/pdf,image/*">
+                                <button class="btn btn-outline-secondary" type="button" id="extractButton">
+                                    <i class="bi bi-text-paragraph"></i>
+                                    <span>Extract Text</span>
+                                </button>
+                            </div>
+                        </div>
+                        <textarea class="form-control mb-3" id="questionText" name="content" rows="4" 
+                                 placeholder="Type or paste your question here..."
+                                 style="font-family: monospace;" required></textarea>
+                    </div>
+
+                    <!-- MCQ Options -->
+                    <div id="mcqOptionsSection" class="mb-3">
+                        <label class="form-label">Answer Options</label>
+                        <div id="optionsContainer">
+                            <!-- Options will be added dynamically -->
+                        </div>
+                        <button type="button" class="btn btn-outline-secondary btn-sm mt-2" onclick="addOption()">
+                            <i class="bi bi-plus-circle me-1"></i>Add Option
+                        </button>
+                    </div>
+
+                    <!-- Solution -->
+                    <div class="mb-3">
+                        <label class="form-label">Solution/Marking Guide</label>
+                        <div id="solutionEditor">
+                            <!-- Quill editor will be initialized here -->
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Question</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+<script src='https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="{{ url_for('static', filename='js/question_bank.js') }}"></script>
+<script>
+// Define updateDropdowns function in global scope
+function updateDropdowns(selectElement, type) {
+    const form = document.getElementById('questionForm');
+    const subject = document.getElementById('subjectSelect').value;
+    const grade = document.getElementById('gradeSelect').value;
+    
+    // Create URL with parameters
+    let url = new URL(window.location.href);
+    url.searchParams.set('subject', subject);
+    
+    if (type === 'subject') {
+        // Reset grade and topic if subject changes
+        document.getElementById('gradeSelect').value = '';
+        document.getElementById('topicSelect').value = '';
+    } else if (type === 'grade') {
+        url.searchParams.set('grade_level', grade);
+    }
+    
+    // Fetch updated dropdowns
+    window.location.href = url.toString();
+}
+
+// Add this function to handle form submission
+function prepareFormData() {
+    // Get content from Quill editors
+    const questionContent = questionEditor.root.innerHTML;
+    const solutionContent = solutionEditor.root.innerHTML;
+    
+    // Update hidden fields
+    document.getElementById('hiddenContent').value = questionContent;
+    document.getElementById('hiddenSolution').value = solutionContent;
+    
+    // Validate content
+    if (!questionContent || questionContent.trim() === '<p><br></p>') {
+        alert('Please enter question content');
+        return false;
+    }
+    
+    return true;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Quill editors
+    questionEditor = new Quill('#questionEditor', {
+        theme: 'snow',
+        modules: {
+            toolbar: [
+                ['bold', 'italic', 'underline'],
+                ['image', 'code-block', 'formula'],
+                [{ 'script': 'sub'}, { 'script': 'super' }],
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                [{ 'align': [] }],
+                [{ 'indent': '-1'}, { 'indent': '+1' }]
+            ]
+        },
+        placeholder: 'Format your question here...'
+    });
+
+    solutionEditor = new Quill('#solutionEditor', {
+        theme: 'snow',
+        modules: {
+            toolbar: [
+                ['bold', 'italic', 'underline'],
+                ['image', 'code-block', 'formula'],
+                [{ 'script': 'sub'}, { 'script': 'super' }],
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                [{ 'align': [] }],
+                [{ 'indent': '-1'}, { 'indent': '+1' }]
+            ]
+        },
+        placeholder: 'Enter the solution and marking guide here...'
+    });
+
+    // Sync plain text with Quill editor
+    document.getElementById('questionText').addEventListener('input', function() {
+        questionEditor.root.innerHTML = this.value.replace(/\n/g, '<br>');
+    });
+
+    // Show/hide MCQ options based on question type
+    document.getElementById('questionType').addEventListener('change', function() {
+        const mcqSection = document.getElementById('mcqOptionsSection');
+        mcqSection.style.display = this.value === 'mcq' ? 'block' : 'none';
+    });
+
+    // Initialize MCQ section visibility
+    const questionType = document.getElementById('questionType');
+    const mcqSection = document.getElementById('mcqOptionsSection');
+    mcqSection.style.display = questionType.value === 'mcq' ? 'block' : 'none';
+
+    document.getElementById('extractButton').addEventListener('click', extractTextFromFile);
+});
+
+// Keep the addOption function for MCQ questions
+function addOption() {
+    const container = document.getElementById('optionsContainer');
+    const optionCount = container.children.length;
+    
+    const optionDiv = document.createElement('div');
+    optionDiv.className = 'input-group mb-2';
+    optionDiv.innerHTML = `
+        <div class="input-group-text">
+            <input type="radio" name="correct_option" value="${optionCount}" 
+                   class="form-check-input mt-0" required>
+        </div>
+        <input type="text" class="form-control" name="options[]" 
+               placeholder="Enter option ${optionCount + 1}" required>
+        <button type="button" class="btn btn-outline-danger" onclick="this.parentElement.remove()">
+            <i class="bi bi-trash"></i>
+        </button>
+    `;
+    
+    container.appendChild(optionDiv);
+}
+
+// Make functions available globally
+window.addOption = addOption;
+window.updateDropdowns = updateDropdowns;
+
+// Add these functions to handle editing
+async function editQuestion(questionId) {
+    try {
+        const response = await fetch(`/questions/${questionId}/edit`);
+        const data = await response.json();
+        
+        // Update modal title
+        document.getElementById('modalTitle').textContent = 'Edit Question';
+        
+        // Update form action
+        const form = document.getElementById('questionForm');
+        form.action = `/questions/${questionId}/edit`;
+        
+        // Set values in form
+        document.getElementById('subjectSelect').value = data.subject;
+        await updateDropdowns(document.getElementById('subjectSelect'), 'subject');
+        
+        document.getElementById('gradeSelect').value = data.grade_level;
+        await updateDropdowns(document.getElementById('gradeSelect'), 'grade');
+        
+        document.getElementById('topicSelect').value = data.topic;
+        document.querySelector('select[name="difficulty"]').value = data.difficulty;
+        document.getElementById('questionType').value = data.question_type;
+        
+        // Update content
+        document.getElementById('questionText').value = data.content;
+        questionEditor.root.innerHTML = data.content;
+        
+        // Update solution
+        solutionEditor.root.innerHTML = data.solution || '';
+        
+        // Handle MCQ options
+        const mcqSection = document.getElementById('mcqOptionsSection');
+        const optionsContainer = document.getElementById('optionsContainer');
+        optionsContainer.innerHTML = ''; // Clear existing options
+        
+        if (data.question_type === 'mcq' && data.options) {
+            mcqSection.style.display = 'block';
+            data.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'input-group mb-2';
+                optionDiv.innerHTML = `
+                    <div class="input-group-text">
+                        <input type="radio" name="correct_option" value="${index}" 
+                               class="form-check-input mt-0" ${option.is_correct ? 'checked' : ''} required>
+                    </div>
+                    <input type="text" class="form-control" name="options[]" 
+                           value="${option.text}" required>
+                    <button type="button" class="btn btn-outline-danger" onclick="this.parentElement.remove()">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                `;
+                optionsContainer.appendChild(optionDiv);
+            });
+        } else {
+            mcqSection.style.display = 'none';
+        }
+        
+        // Show modal
+        const modal = new bootstrap.Modal(document.getElementById('questionModal'));
+        modal.show();
+        
+    } catch (error) {
+        console.error('Error fetching question:', error);
+        alert('Error loading question data');
+    }
+}
+
+// Make the function available globally
+window.editQuestion = editQuestion;
+</script>
+
+<style>
+.ql-editor {
+    min-height: 100px;
+}
+
+#questionText {
+    font-size: 14px;
+    line-height: 1.6;
+    resize: vertical;
+}
+
+.ql-toolbar.ql-snow {
+    border-radius: 4px 4px 0 0;
+}
+
+.ql-container.ql-snow {
+    border-radius: 0 0 4px 4px;
+}
+
+.input-group-text {
+    background-color: #f8f9fa;
+}
+</style>
+{% endblock %} 

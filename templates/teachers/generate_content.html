@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">Generate New Content</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        <!--{{ csrf_token() }}-->
+                        <div class="mb-3">
+                            <label class="form-label">Subject</label>
+                            <select class="form-select" name="subject" required>
+                                <option value="">Select Subject</option>
+                                <option value="Physics">Physics</option>
+                                <option value="Mathematics">Mathematics</option>
+                                <option value="Chemistry">Chemistry</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Topic</label>
+                            <input type="text" class="form-control" name="topic" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Grade Level</label>
+                            <select class="form-select" name="grade_level" required>
+                                <option value="">Select Grade Level</option>
+                                <option value="Form 1">Form 1</option>
+                                <option value="Form 2">Form 2</option>
+                                <option value="Form 3">Form 3</option>
+                                <option value="Form 4">Form 4</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Content Type</label>
+                            <select class="form-select" name="content_type" required>
+                                <option value="lesson">Lesson</option>
+                                <option value="notes">Notes</option>
+                                <option value="worksheet">Worksheet</option>
+                                <option value="quiz">Quiz</option>
+                            </select>
+                        </div>
+
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-magic me-2"></i>Generate Content
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

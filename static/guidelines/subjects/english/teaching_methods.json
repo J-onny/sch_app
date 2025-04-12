@@ -1,0 +1,18 @@
+{
+  "local_language_integration": {
+    "description": "Use of mother tongue to support learning",
+    "strategies": [
+      "Compare English concepts with local language equivalents",
+      "Use local examples and contexts",
+      "Allow initial responses in local language"
+    ]
+  },
+  "cultural_context": {
+    "description": "Integration of local cultural elements",
+    "examples": [
+      "Local stories and proverbs",
+      "Community practices and traditions",
+      "Local social structures"
+    ]
+  }
+} 

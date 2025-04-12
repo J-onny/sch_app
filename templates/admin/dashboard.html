@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Admin Dashboard</h1>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addResourceModal">
+            <i class="bi bi-plus-circle"></i> Add Teaching Resource
+        </button>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Users</h5>
+                    <h2>{{ stats.total_users }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Resources</h5>
+                    <h2>{{ stats.total_resources }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Lessons</h5>
+                    <h2>{{ stats.total_lessons }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Assessments</h5>
+                    <h2>{{ stats.total_assessments }}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Users Management -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0">User Management</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>School</th>
+                            <th>Subject</th>
+                            <th>Role</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in recent_users %}
+                        <tr>
+                            <td>{{ user.name }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.school }}</td>
+                            <td>{{ user.subject }}</td>
+                            <td><span class="badge bg-{{ 'primary' if user.role == 'admin' else 'secondary' }}">{{ user.role }}</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-danger" onclick="deleteUser({{ user.id }})">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resources Management -->
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">Teaching Resources</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Type</th>
+                            <th>Subject</th>
+                            <th>Added On</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for resource in resources %}
+                        <tr>
+                            <td>{{ resource.title }}</td>
+                            <td>{{ resource.resource_type }}</td>
+                            <td>{{ resource.subject }}</td>
+                            <td>{{ resource.created_at.strftime('%Y-%m-%d') }}</td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-primary" onclick="editResource({{ resource.id }})">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger" onclick="deleteResource({{ resource.id }})">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Resource Modal -->
+<div class="modal fade" id="addResourceModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Teaching Resource</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="resourceForm">
+                    <div class="mb-3">
+                        <label class="form-label">Title</label>
+                        <input type="text" class="form-control" name="title" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Type</label>
+                        <select class="form-select" name="resource_type" required>
+                            <option value="document">Document</option>
+                            <option value="video">Video</option>
+                            <option value="link">External Link</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Subject</label>
+                        <input type="text" class="form-control" name="subject" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" name="description"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">File/URL</label>
+                        <input type="file" class="form-control" name="file">
+                        <input type="url" class="form-control mt-2" name="url" placeholder="Or enter URL">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="saveResource()">Save Resource</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+function deleteUser(userId) {
+    if (confirm('Are you sure you want to delete this user?')) {
+        fetch(`/admin/users/${userId}/delete`, {
+            method: 'DELETE'
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                location.reload();
+            }
+        });
+    }
+}
+
+function saveResource() {
+    const form = document.getElementById('resourceForm');
+    const formData = new FormData(form);
+    
+    fetch('/admin/resources/add', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            location.reload();
+        }
+    });
+}
+
+function deleteResource(resourceId) {
+    if (confirm('Are you sure you want to delete this resource?')) {
+        fetch(`/admin/resources/${resourceId}/delete`, {
+            method: 'DELETE'
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                location.reload();
+            }
+        });
+    }
+}
+</script>
+{% endblock %} 

@@ -1,0 +1,497 @@
+[
+  {
+    "class": "Senior 1",
+    "term": "1",
+    "theme": "Introduction",
+    "topic": "Introduction to Physics",
+    "competency": "The learner should be able to understand the importance of Physics and safe laboratory practice.",
+    "learning_outcomes": [
+      {
+        "description": "understand the meaning of physics, its branches and why it is important to study Physics (u, v/a))",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      },
+      {
+        "description": "understand why it is important to follow the laboratory rules and regulations (u, v/a)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      }
+    ],
+    "suggested_learning_activities": [
+      "In groups, learners research the meaning of the word physics; discuss the science they have studied in primary schools, and relate the topics studied to the definition of physics. After class discussion, individuals produce reports on conclusions.",
+      "In groups, learners research and discuss some of the natural phenomena which can be explained using physics, report to and discuss with the class.",
+      "In groups, learners discuss and relate different careers to Physics",
+      "In groups learners discuss rules and risk assessment to keep themselves and others safe in the laboratory",
+      "produce a poster or chart to guide the class in safe practice"
+    ],
+    "sample_assessment_strategy": [
+      "Observe and listen to learners as they research and discuss the meaning of physics, its importance and safe practice in the laboratory. Intervene to ensure that all are making progress towards achievement of learning outcomes.",
+      "Evaluate learning by assessment of products: group and individual reports; safety guidance."
+    ],
+    "ict_support": "Learner uses internet to search for some personalities who have made discoveries in Physics and display on a spreadsheet what they did.",
+    "periods": 6
+  },
+  {
+    "class": "Senior 1",
+    "term": "1",
+    "theme": "Mechanics and Properties of Matter",
+    "topic": "Measurements in Physics",
+    "competency": "The learner should be able to estimate and measure length, area, volume, mass, density, and time and express them using appropriate units.",
+    "learning_outcomes": [
+      {
+        "description": "understand how to estimate and measure physical quantities: length, area, volume, mass, and time (u, s, gs)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      },
+      {
+        "description": "explain how they choose the right measuring instrument and units; explain how to use the instruments to ensure accuracy (u, s)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      },
+      {
+        "description": "appreciate that the accuracy of measurements may be improved by making several measurements and taking an average value (gs, v/a)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      },
+      {
+        "description": "identify potential sources of error in measurement and devise strategies to minimise them (u, s, v/a)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      },
+      {
+        "description": "understand the scientific method and explain the steps used in relation to the study of physics (u)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      },
+      {
+        "description": "know that practical investigations involve a 'fair test', analysis, prediction and justification of results, and observations, and apply learning in practice (k, s)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      },
+      {
+        "description": "record data in graphs and charts and look for trends (u, s)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      },
+      {
+        "description": "understand and be able to use scientific notation and significant figures (u, s)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      },
+      {
+        "description": "understand density and its application to floating and sinking (u)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      },
+      {
+        "description": "determine densities of substances and relate them to purity (u, s, gs)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      },
+      {
+        "description": "understand the global nature of ocean currents and how they are driven by changes in water density and temperature (u, s)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      }
+    ],
+    "suggested_learning_activities": [
+      "In groups, learners examine, discuss, research, and make notes on the accurate use of tape measures, rulers, vernier calipers, stop clocks/watches, balances, measuring cylinders, and displacement cans.",
+      "In pairs, learners choose appropriate units, record estimates, and then make and record accurate measurements of each of the following: the length of a football pitch, the width of a classroom, the area of a desk top, the thickness of a desk top, the time a friend takes to walk 20 paces, the mass of a pen, the volume of water in a container, the volume of a regular and an irregular solid",
+      "Listen to group and pair discussions. Ask probing questions to promote critical thinking and ensure that learners gain expected knowledge, understanding, and skills.",
+      "Observe pairs and groups engaged in practical activities and intervene to ensure practice is safe and investigations are well planned and conducted.",
+      "Evaluate quality of learning through assessment of products: outcomes of/reports on measuring exercises; investigation reports; scientific notation calculations.",
+      "In pairs, learners compare estimates and accurate measurements, agree on techniques for selecting measuring instruments and units and for ensuring accuracy/minimising error before completing reports on class conclusions.",
+      "In groups, learners plan, carry out, and report on a simple investigation, e.g. to compare the rate of cooling of water and a strong salt solution, considering: predictions/hypotheses, ensuring a fair test, controlled and measured variables, selection of equipment and materials, frequency of measurements, accuracy of measurements, recording results in a table, presenting results in a graph, analysis of results and drawing conclusions, possible sources of error, possible improvements",
+      "In pairs, learners research on the use of scientific notation before class discussion about the need for its use when dealing with very large or small numbers (e.g. × 106, 4.31 x 10−3)",
+      "Individuals practice Identifying and rounding of numbers to required significant figures, converting large & small numbers into scientific notation",
+      "In groups, learners predict whether solids float or sink in water and record conclusions, then plan, carry out and report on a practical investigation to find the densities of the solids and compare results with the theoretical values and predictions on floating.",
+      "In pairs, learners research, discuss, and produce a report on: how ocean currents are related to changes in water density, the possible impact on ocean currents of the warming of the North Atlantic due to climate change."
+    ],
+    "sample_assessment_strategy": [
+      "Observe and listen to learners as they research and discuss the meaning of physics, its importance and safe practice in the laboratory. Intervene to ensure that all are making progress towards achievement of learning outcomes.",
+      "Evaluate learning by assessment of products: group and individual reports; safety guidance."
+    ],
+    "ict_support": "use spreadsheets to record experimental results, generate graphs and analyse results, use spreadsheets and enter appropriate formulae to make calculations",
+    "periods": 30,
+    "note": [
+      "the reading of vernier calipers and micrometer screw gauge should be left out but only mention instances where these instruments are used",
+      "both digital and analogue clocks should be used if available",
+      "Accuracy and significant figures to be emphasised throughout the whole syllabus, for both theoretical and practical work",
+      "Scientific method should be continuously applied to ALL other topics and sub-topics",
+      "The experiment to determine density using the density bottle should not be carried out, though results obtained from the experiment may be used in numerical problems"
+    ]
+  },
+  {
+    "class": "Senior 1",
+    "term": "2",
+    "theme": "Mechanics and Properties of Matter",
+    "topic": "States of Matter",
+    "competency": "The learner should be able to use the knowledge of the arrangement and motion of particles to explain the properties of solids, liquids, gases and plasma.",
+    "learning_outcomes": [
+      {
+        "description": "understand the meaning of matter (u)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      },
+      {
+        "description": "understand that atoms are the building blocks from which all matter is made; appreciate that the states of matter have different properties (k, u)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      },
+      {
+        "description": "apply the particle theory to explain diffusion and Brownian motion and their applications (s)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      },
+      {
+        "description": "understand how the particle theory of matter explains the properties of solids, liquids and gases, changes of state, and diffusion (u)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      },
+      {
+        "description": "understand the meaning and importance of plasma in physics (u, v/a)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      }
+    ],
+    "suggested_learning_activities": [
+      "In groups, learners draw on their prior learning and research to produce a presentation on: why matter is anything which occupies space and has mass, the particle theory of matter, how matter exists in different states and give common examples of solids, liquids, and gases, the nature of plasma and why it is described as the fourth state of matter, the properties of solids, liquids, and gases, including shape, pouring, and compressing, Brownian motion",
+      "Listen to presentations and group discussions and where appropriate, ask questions to promote clarification and deepen understanding.",
+      "Observe groups and pairs and intervene to offer guidance.",
+      "Evaluate the quality of learning and progress towards the learning outcomes through assessment of products: presentations, investigation reports, and personal research.",
+      "In pairs, learners observe/present demonstrations, research, and report on the factors that affect rate of diffusion in fluids; compare diffusion of liquids and gases (link to transpiration, and osmosis in biology).",
+      "In groups, learners apply knowledge of the particle theory to explain on a poster: the properties of solids, liquids and gases, why, when curry is cooking in the kitchen, it can be smelt in all parts of the home, even if there are no air currents, why diffusion takes place faster in a gas than in a liquid",
+      "In groups, learners plan, carry out and report on investigations, using the scientific method to explain, using water and ice, the changes of state of matter resulting from heating and cooling. They use the observations to explain why heat is taken in during melting and boiling and given out during condensing and freezing.",
+      "In pairs, learners research, discuss and report on the importance of changes of state in everyday life, including control of body temperature in mammals, rain and the water cycle, cooling drinks with ice and making ice cream."
+    ],
+    "sample_assessment_strategy": [
+      "Listen to presentations and group discussions and where appropriate, ask questions to promote clarification and deepen understanding.",
+      "Observe groups and pairs and intervene to offer guidance.",
+      "Evaluate the quality of learning and progress towards the learning outcomes through assessment of products: presentations, investigation reports, and personal research."
+    ],
+    "ict_support": "Learners use the internet or video to view simulations of plasma in nature",
+    "periods": 10,
+    "note": [
+      "More discussion on plasma and its availability to be emphasised",
+      "Cooling curves should not be introduced at this point"
+    ]
+  },
+  {
+    "class": "Senior 1",
+    "term": "2",
+    "theme": "Mechanics and Properties of Matter",
+    "topic": "The Effects of Forces",
+    "competency": "The learner should be able to explore the nature and types of force and describe how forces move or change the shape of objects, and understand some common applications of forces.",
+    "learning_outcomes": [
+      {
+        "description": "know that a force is a push or a pull and that the unit of force is the Newton (k)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      },
+      {
+        "description": "know the effects of balanced and unbalanced forces on objects (k, s)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      },
+      {
+        "description": "understand the existence of the force of gravity and distinguish between mass and weight (u)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      },
+      {
+        "description": "appreciate that the weight of a body depends on the size of the force of gravity acting upon it (k, u, v/a)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      },
+      {
+        "description": "understand the concept of friction in everyday life contexts (u)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      },
+      {
+        "description": "understand the meaning of adhesion and cohesion as forms of molecular forces (u)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      },
+      {
+        "description": "explain surface tension and capillarity in terms of adhesion and cohesion and their application (u, v/a)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      }
+    ],
+    "suggested_learning_activities": [
+      "In pairs, learners use springs, rubber bands, and force meters to research, push, and pull forces and use this to explain the meaning of force, identify a variety of forces and give instances where they occur, categorise forces as contact and non-contact, demonstrate the effects of forces on objects, identify examples of the effects of forces (change of movement and/or shape) on objects",
+      "Listen to pairs/groups and ask probing questions to promote critical thinking and deepen understanding of forces.",
+      "Observe learners involved in activities; intervening to avoid misconceptions and to help with strategies for solving numerical problems related to the resultant of two or more forces.",
+      "Listen to discussions and pose questions where appropriate to deepen thinking on how adhesion and cohesion occur and the practical implications.",
+      "Observe group work and assess presentations to gauge progress towards the learning outcomes; intervening as appropriate.",
+      "express forces in Newtons and use the symbol N.",
+      "In pairs, learners: consider a tug of war to explain forces and predict in diagrams what will happen when the pulling forces of the teams are a) unbalanced and b) balanced, calculate resultant forces when linear and perpendicular forces are applied to an object",
+      "In groups, learners draw on prior learning and research about gravity and explain in a presentation: why gravity is less on the moon than on Earth, why objects are attracted to the Earth, why the Earth revolves around the sun, applications of force of gravity such as irrigation in farming and other consequences of weight, the relationship between mass and weight (W=mg), why the weight of a body depends on the size of the force of gravity acting upon it",
+      "In groups, learners draw on prior learning to explain friction, and plan and carry out a practical investigation to find the effects and use of frictional forces to explain: the factors that affect frictional force between two surfaces in contact and determine the limiting friction between them, ways of reducing or increasing friction, why heavy objects can be more easily moved on rollers, why objects slide more easily across a smooth surface than a rough surface, why car tyres become smoother and thinner with time and why tyre tread is important, why it is easier to write with a pencil on paper rather than on glossy plastic",
+      "In groups, learners investigate the existence of surface tension on water, observe demonstrations and explain in a presentation: the effects of spraying a layer of oil on the water surface in ponds, capillarity, cohesion, and adhesion and explore with glass tubes of different diameters; real life examples of adhesion and cohesion (e.g. damp course in buildings, and fluid flow in plant stems)"
+    ],
+    "sample_assessment_strategy": [
+      "Listen to pairs/groups and ask probing questions to promote critical thinking and deepen understanding of forces.",
+      "Observe learners involved in activities; intervening to avoid misconceptions and to help with strategies for solving numerical problems related to the resultant of two or more forces.",
+      "Listen to discussions and pose questions where appropriate to deepen thinking on how adhesion and cohesion occur and the practical implications.",
+      "Observe group work and assess presentations to gauge progress towards the learning outcomes; intervening as appropriate."
+    ],
+    "ict_support": "Use Internet as a source of research for information about gravity on earth and other planets",
+    "periods": 16,
+    "note": [
+      "Treatment of F=ma not required at this point",
+      "Both scale drawing and mathematical (Pythagoras theorem) method can be used to obtain the resultant force of perpendicular forces.",
+      "The angle at which the resultant is inclined is not required",
+      "Only the qualitative treatment of friction is required",
+      "The use of the expression W=mg to be emphasized",
+      "Emphasise the meaning rather than the definition of surface tension",
+      "Mathematical treatment of surface tension is beyond the scope of this syllabus"
+    ]
+  },
+  {
+    "class": "Senior 1",
+    "term": "2",
+    "theme": "Heat",
+    "topic": "Temperature Measurements",
+    "competency": "Appreciate that temperature change is a result of heat effects in a body and that daily temperature changes have an effect on our lives.",
+    "learning_outcomes": [
+      {
+        "description": "Understand the difference between heat and temperature (u)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      },
+      {
+        "description": "Understand how temperature scales are established (u)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      },
+      {
+        "description": "Calibrate a thermometer and use it to measure temperature (s, u)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      },
+      {
+        "description": "Compare the qualities of thermometric liquids (u, s, v/a)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      },
+      {
+        "description": "Describe the causes and effects of the daily variations in atmospheric temperature (u, v/a)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      }
+    ],
+    "suggested_learning_activities": [
+      "In groups, learners discuss the effects of heat on substances and use the discussion to explain the difference between heat and temperature",
+      "In groups, learners draw on prior learning about how thermometers measure temperature and compare the accuracy of mercury, alcohol and digital thermometers as water is heated and/or cooled.",
+      "In groups, learners plan and report on an investigation into the thermometric qualities of liquids; calibrating their experimental thermometers and evaluating the accuracy of the calibration.",
+      "In groups, learners discuss and report on the causes of the variation in atmospheric temperature and its effects to life on earth."
+    ],
+    "sample_assessment_strategy": [
+      "Listen to discussion in groups and pairs and pose questions to encourage thinking to understand that energy can neither be created nor destroyed, only transformed from one type to another.",
+      "Observe how learners participate in group and pair work; ensuring that all participate and make progress.",
+      "Assess the quality of products and scientific literacy, and then evaluate progress towards the learning outcomes."
+    ],
+    "ict_support": "use any computer program to draw a flow chart showing the various energy changes, use data collection tools such as a temperature probe (sensor) to capture the temperature heat variation",
+    "periods": 10,
+    "note": "Gas and resistance thermometers should not to be discussed at this level"
+  },
+  {
+    "class": "Senior 1",
+    "term": "3",
+    "theme": "Heat",
+    "topic": "Heat Transfer",
+    "competency": "The learner should be able to explain the modes of heat transfer and their applications to daily life.",
+    "learning_outcomes": [
+      {
+        "description": "understand how heat energy is transferred and the rate at which transfer takes place (u, s)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      },
+      {
+        "description": "understand what is happening at particle level when conduction, convection, and radiation take place and their application (k, u, v/a)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      },
+      {
+        "description": "understand that greenhouse effect and global warming are aspects related to heat transfer on the earth surface (u, v/a)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      }
+    ],
+    "suggested_learning_activities": [
+      "In groups, learners design, carry out and report on investigations to show how heat is transferred in different solids, water and air to explain: conduction in different solids in terms of particle theory, convection in liquids and air in terms of particle theory, the causes and effects of convection currents in the atmosphere and their relation to weather/climate",
+      "In groups, learners use prior learning to design, carry out and report on investigations to: Compare rates of heat conduction by different materials, compare the radiation of heat from different surfaces and how heat is transferred by radiation, compare how well heat is absorbed/ reflected by different surfaces",
+      "In pairs, learners research and make a presentation on how heat transfer is kept to a minimum in a vacuum flask",
+      "In groups, learners search and make presentations on causes and effects of global warming and how the greenhouse works"
+    ],
+    "sample_assessment_strategy": [
+      "Listen to discussions and encourage learners to draw on prior learning and their experience of heat transfer and insulation. Pose questions to promote deep thinking.",
+      "Observe how learners work together to share information about heat and explain it at particle level. Intervene to offer guidance and deepen understanding.",
+      "Assess learners' knowledge, understanding, and skills through products; making sure all progress to achieve learning outcomes."
+    ],
+    "ict_support": null,
+    "periods": 12
+  },
+  {
+    "class": "Senior 1",
+    "term": "3",
+    "theme": "Heat",
+    "topic": "Expansion of Solids, Liquids and Gases",
+    "competency": "The learner should be able to explain the effect of heat on the expansion of solids, liquids, and gases and explore their applications.",
+    "learning_outcomes": [
+      {
+        "description": "understand that substances expand on heating, and recognise some applications of expansion (u, s)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      },
+      {
+        "description": "understand the effect and consequences of changes in heat on volume and density of water (u, s)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      },
+      {
+        "description": "know about the anomalous expansion of water between 0ºC and 4 ºC and its implications (u, k, v/a)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      }
+    ],
+    "suggested_learning_activities": [
+      "In groups, learners design, carry out and report on a practical investigation to compare the rates of expansion of solids and liquids. Explain how the expansion of materials is observed and used in e.g. expansion of tyres/balloons, metal bridges, and weather systems, water expanding when frozen/ice forming on the surface of water. Share the results with the class.",
+      "In pairs, learners research, discuss and prepare a presentation on 'How particle theory can be used to explain how heating changes the volume and density of solids, liquids, and gases'.",
+      "In pairs, learners produce an annotated diagram / graphic presentation, explaining why ice forms on the surface of a body of water and why this is important for life on earth."
+    ],
+    "sample_assessment_strategy": [
+      "Listen to groups' and pairs' discussions and ask probing questions to ensure understanding.",
+      "Observe how learners investigate and use the outcomes to explain expansion; intervene to deepen learning of all participants.",
+      "Evaluate quality of learning through assessment of products: investigation reports and presentations."
+    ],
+    "ict_support": null,
+    "periods": 8,
+    "note": [
+      "Gas laws should not be used to explain expansion of gases at this level.",
+      "Numerical treatment of gas expansion not required.",
+      "Only simple illustration of gas expansion in everyday life is required."
+    ]
+  },
+  {
+    "class": "Senior 1",
+    "term": "3",
+    "theme": "Light",
+    "topic": "Nature of Light; Reflection at Plane Surfaces",
+    "competency": "The learner should investigate how some objects emit light resulting in light and shade, while other objects, such as a mirror, simply reflect light, and understand the applications of light/shade and reflection.",
+    "learning_outcomes": [
+      {
+        "description": "Know illuminated and light source objects in everyday life (u, s)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      },
+      {
+        "description": "understand how shadows are formed and that eclipses are natural forms of shadows (u)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      },
+      {
+        "description": "understand how the reflection of light from plane surfaces occurs and how we can make use of this (k, u, s, gs)",
+        "assessment_type": [
+          "observation",
+          "evaluation of products"
+        ]
+      }
+    ],
+    "suggested_learning_activities": [
+      "In groups, learners brainstorm prior learning about natural and artificial sources of light and the formation of shadows, and explain using diagrams.",
+      "Listen to pairs' discussions and intervene to ensure that diagrams are drawn accurately and that they use them to explain the nature of light, the formation of shadows, and the pinhole camera.",
+      "In pairs, learners use their knowledge about how light travels to explain in diagrams how light from the sun reaches the Earth and how eclipses are formed.",
+      "Observe pairs and groups engaged in practical activities and intervene to ensure that investigations are well planned and conducted and misconceptions are avoided.",
+      "In pairs, learners apply prior learning to investigations of a pinhole camera and use it to explain magnification and image, using diagrams.",
+      "Evaluate learning through products: diagrams and designs; assess progress towards the learning outcomes.",
+      "In pairs, learners investigate the characteristics of images formed by plane mirrors and research and explain angles of incidence and reflection; recording findings with (ray) diagrams. Then they use this information to verify laws of reflection",
+      "In pairs, learners apply their knowledge of reflection to design, make, and report on a device (periscope) using card and mirrors which would allow a person to see over a wall."
+    ],
+    "sample_assessment_strategy": [
+      "Listen to pairs' discussions and intervene to ensure that diagrams are drawn accurately and that they use them to explain the nature of light, the formation of shadows, and the pinhole camera.",
+      "Observe pairs and groups engaged in practical activities and intervene to ensure that investigations are well planned and conducted and misconceptions are avoided.",
+      "Evaluate learning through products: diagrams and designs; assess progress towards the learning outcomes."
+    ],
+    "ict_support": "Use of ICT simulations and other relevant pictures to show the appearance of the sun, moon and earth during eclipses.",
+    "periods": 16
+  }
+]

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="text-center">
+    <h1>Welcome to Teacher's Lesson Automation</h1>
+    <p class="lead">Streamline your lesson planning and teaching workflow</p>
+    {% if not current_user.is_authenticated %}
+        <div class="mt-4">
+            <a href="{{ url_for('auth.login') }}" class="btn btn-primary me-2">Login</a>
+            <a href="{{ url_for('auth.signup') }}" class="btn btn-outline-primary">Sign Up</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %} 

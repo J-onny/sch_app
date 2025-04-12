@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1>Edit Content</h1>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary" onclick="saveContent()">
+                        <i class="fas fa-save"></i> Save
+                    </button>
+                    <a href="{{ url_for('teachers.view_content', content_id=content.id) }}" 
+                       class="btn btn-secondary">
+                        <i class="fas fa-times"></i> Cancel
+                    </a>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <form id="editForm">
+                        <div class="mb-3">
+                            <label class="form-label">Title</label>
+                            <input type="text" class="form-control" id="title" 
+                                   value="{{ content.title }}" required>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label class="form-label">Subject</label>
+                                <input type="text" class="form-control" id="subject" 
+                                       value="{{ content.subject }}" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Grade Level</label>
+                                <input type="text" class="form-control" id="grade_level" 
+                                       value="{{ content.grade_level }}" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Content Type</label>
+                                <input type="text" class="form-control" id="content_type" 
+                                       value="{{ content.content_type }}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Content</label>
+                            <textarea class="form-control" id="content_data" rows="10">
+                                {{ content.content|tojson|safe }}
+                            </textarea>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function saveContent() {
+    const contentData = {
+        title: document.getElementById('title').value,
+        subject: document.getElementById('subject').value,
+        grade_level: document.getElementById('grade_level').value,
+        content_type: document.getElementById('content_type').value,
+        content: JSON.parse(document.getElementById('content_data').value)
+    };
+
+    fetch("{{ url_for('teachers.save_content', content_id=content.id) }}", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(contentData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            alert('Content saved successfully!');
+            window.location.href = "{{ url_for('teachers.view_content', content_id=content.id) }}";
+        } else {
+            alert('Error saving content: ' + data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error saving content');
+    });
+}
+</script>
+{% endblock %} 

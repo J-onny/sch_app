@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .school-info {
+            margin-bottom: 20px;
+        }
+        .assessment-info {
+            margin-bottom: 30px;
+        }
+        .question {
+            margin-bottom: 25px;
+            page-break-inside: avoid;
+        }
+        .question-header {
+            background-color: #f5f5f5;
+            padding: 5px 10px;
+            margin-bottom: 10px;
+        }
+        .options {
+            margin-left: 20px;
+        }
+        .answer-space {
+            border: 1px solid #ddd;
+            min-height: 100px;
+            margin-top: 10px;
+        }
+        @page {
+            size: A4;
+            margin: 2cm;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h2>{{ school }}</h2>
+        <h3>{{ assessment.title }}</h3>
+    </div>
+
+    <div class="assessment-info">
+        <p><strong>Subject:</strong> {{ assessment.subject }}</p>
+        <p><strong>Grade:</strong> {{ assessment.grade_level }}</p>
+        <p><strong>Duration:</strong> {{ assessment.duration }}</p>
+        <p><strong>Date:</strong> {{ date }}</p>
+    </div>
+
+    <div class="instructions">
+        <h4>Instructions:</h4>
+        <ul>
+            <li>Answer all questions in the spaces provided</li>
+            <li>Total marks: {{ assessment.total_marks }}</li>
+            <li>Time allowed: {{ assessment.duration }}</li>
+        </ul>
+    </div>
+
+    <div class="questions">
+        {% for question in assessment.questions|sort(attribute='order') %}
+        <div class="question">
+            <div class="question-header">
+                <strong>Question {{ loop.index }}</strong> 
+                <span style="float: right;">[{{ question.marks }} marks]</span>
+            </div>
+            
+            {% if question.context %}
+            <div class="context">
+                {{ question.context }}
+            </div>
+            {% endif %}
+            
+            <div class="question-text">
+                {{ question.content }}
+            </div>
+
+            {% if question.question_type == 'multiple_choice' %}
+            <div class="options">
+                {% for option in question.options|sort(attribute='order') %}
+                <div class="option">
+                    ☐ {{ option.option_text }}
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="answer-space">
+                <!-- Space for written answers -->
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html> 

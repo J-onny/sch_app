@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Scheme of Work</h2>
+        <div>
+            <a href="{{ url_for('schemes.list_schemes') }}" class="btn btn-secondary">Back</a>
+            <a href="{{ url_for('schemes.download_scheme', scheme_id=scheme.id, format='pdf') }}" class="btn btn-primary">
+                Download PDF
+            </a>
+            <a href="{{ url_for('schemes.download_scheme', scheme_id=scheme.id, format='docx') }}" class="btn btn-link" title="Download Word Document">
+                <i class="fas fa-file-word text-primary"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="scheme-header mb-4">
+        <h3 class="text-center">SCHEME OF WORK FOR A COMPETENTENCY-BASED CURRICULUM</h3>
+        <h4 class="text-center">SCHOOL: {{ current_user.school|upper }}</h4>
+        <div class="row">
+            <div class="col-md-6">
+                <p><strong>NAME OF TEACHER:</strong> {{ current_user.name|upper }}</p>
+                <p><strong>SUBJECT:</strong> {{ scheme.subject|upper }}</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <p><strong>CLASS:</strong> {{ scheme.grade_level }}</p>
+                <p><strong>TERM:</strong> {{ scheme.term }} YEAR: {{ scheme.created_at.year }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>WEEK</th>
+                    <th>PERIODS</th>
+                    <th>THEME/TOPIC<br>SUB-TOPIC</th>
+                    <th>COMPETENCY</th>
+                    <th>LEARNING OUTCOMES</th>
+                    <th>LEARNING ACTIVITIES</th>
+                    <th>METHODOLOGY</th>
+                    <th>TEACHING/LEARNING RESOURCES</th>
+                    <th>REFERENCES</th>
+                    <th>REMARKS</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for topic in scheme.topics|sort(attribute='order') %}
+                <tr>
+                    <td>{{ topic.week }}</td>
+                    <td>{{ topic.periods }}</td>
+                    <td>
+                        <strong>{{ topic.theme }}</strong><br>
+                        {{ topic.title }}<br>
+                        <em>{{ topic.sub_topic }}</em>
+                    </td>
+                    <td>{{ topic.competency }}</td>
+                    <td>
+                        <ul class="list-unstyled mb-0">
+                        {% for objective in topic.learning_objectives|from_json %}
+                            <li>{{ objective }}</li>
+                        {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        <ul class="list-unstyled mb-0">
+                        {% for activity in topic.learning_activities|from_json %}
+                            <li>{{ activity }}</li>
+                        {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        <ul class="list-unstyled mb-0">
+                        {% for method in topic.teaching_methods|from_json %}
+                            <li>{{ method }}</li>
+                        {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        <ul class="list-unstyled mb-0">
+                        {% for resource in topic.resources|from_json %}
+                            <li>{{ resource }}</li>
+                        {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        <ul class="list-unstyled mb-0">
+                        {% for ref in topic.references|from_json %}
+                            <li>{{ ref }}</li>
+                        {% endfor %}
+                        </ul>
+                    </td>
+                    <td>{{ topic.remarks }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="signatures mt-5">
+        <div class="row">
+            <div class="col-md-4">
+                <p>Signed: _________________________</p>
+                <p>Director of Studies</p>
+                <p>Date: _________________________</p>
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4 text-end">
+                <p>Signed: _________________________</p>
+                <p>Head of Department</p>
+                <p>Date: _________________________</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block styles %}
+<style>
+    @media print {
+        .btn { display: none; }
+        .table th, .table td { font-size: 12px; }
+        .container-fluid { padding: 0; }
+        .signatures { margin-top: 50px; }
+    }
+    
+    /* PDF-specific styles */
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 1em;
+    }
+    
+    .table th, 
+    .table td {
+        border: 1px solid #000;
+        padding: 8px;
+        font-size: 12px;
+    }
+    
+    .table th {
+        background-color: #f8f9fa;
+        font-weight: bold;
+    }
+    
+    /* Additional PDF styles */
+    .scheme-header {
+        margin-bottom: 20px;
+    }
+    
+    .scheme-header h3,
+    .scheme-header h4 {
+        text-align: center;
+        margin: 10px 0;
+    }
+
+    .signatures {
+        margin-top: 50px;
+    }
+</style>
+{% endblock %}
+{% endblock %} 

@@ -1,0 +1,354 @@
+```json
+[
+  {
+    "class": "Senior 2",
+    "term": "1",
+    "theme": "Mechanics and Properties of Matter",
+    "topic": "Work, Energy and Power",
+    "competency": "Understand and use the relationship between energy, work done, force, and power in the operation of simple machines",
+    "learning_outcomes": [
+      {
+        "description": "know that the sun is our major source of energy, and the different forms of energy (k)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "know that energy can be changed from one form into another and understand the law of conservation of energy (k, u)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "understand the positive and negative effects of solar energy(u)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "understand the difference between renewable and non-renewable energy resources with respect to Uganda. (u, v/a)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "know and use the relationship between work done, force, and distance moved, and time taken (k, s)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "understand that an object may have energy due to its motion or its position and change between kinetic and positional potential energy (u, s)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "know the mathematical relationship between positional potential energy and kinetic energy, and use it in calculations (k, u, s, gs)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "understand the meaning of machines and explain how simple machines simplify work (u, s)",
+        "assessment_type": ["observation", "evaluation of products"]
+      }
+    ],
+    "suggested_learning_activities": [
+      "In groups, learners draw on prior learning to discuss and explain the energy transformations that take place: at a waterfall, when a diesel generator is used to provide light and heat, when fruit falls to the ground from a tree",
+      "In pairs, learners research on the law of conservation of energy and explain it on a poster or chart",
+      "In groups, learners research and report on the positive and negative impact of solar energy.",
+      "In pairs, learners research on the terms; work, energy, and power and discuss how they are related. They explain in diagrams the factors that determine the amount of work done by moving masses through different distances, and identify examples of work being done on an object in everyday life.",
+      "In groups, learners discuss prior learning about energy and transformation, kinetic and potential energy and create a poster to explain how potential energy is converted to kinetic energy as an object falls. Using this understanding, groups predict and report on the energy changes that take place as a pendulum swings.",
+      "In pairs, learners calculate work done (e.g. when a student lifts a weight of 800 N through a height of 10 m in 48 s.) using the equation work done = force x distance moved in the direction of force, and the power developed using the equation: power = work done ÷ time taken.",
+      "In groups, learners burn wood, paper or liquid paraffin, observe and discuss the reaction and explain on a poster: energy transformation, energy loss and conservation, renewable and non-renewable energy sources, their effects on the environment, ways to conserve energy for the future",
+      "In pairs, learners calculate the kinetic energy and the velocity of a falling object e.g. brick of mass 0.5 kg falls from the top of a wall 20m high and hit the ground (ignoring any friction as the brick travels through the air).",
+      "In groups, learners revisit prior learning and produce a poster to explain the moment of a force and how machines make it possible to perform tasks using smaller forces than would otherwise be the case, referring to applications such as: opening a door, garden tools, wheel and axle, pulley system, inclined plane, lever and screw",
+      "In pairs, learners use simple equipment to investigate the following and explain using a poster or presentation: 1st, 2nd and 3rd class levers, why it is easier to undo a tight nut using a spanner with a long handle than one with a short handle, load, effort, and fulcrum, mechanical advantage, velocity ratio and efficiency of simple machines, power loss and efficiency in simple machines, and how eﬃciency can be maximised."
+    ],
+    "sample_assessment_strategy": [
+      "Listen to pair and group discussions; ask probing questions to promote thinking and understanding about work, power, and energy.",
+      "Observe pairs and groups engaged in activities and intervene to ensure calculations are well understood and conducted.",
+      "Evaluate quality of learning through assessment of products: work diagrams, energy transformation reports, work posters, and work/KE/velocity calculations, and gauge progress towards learning outcomes."
+    ],
+    "ict_support": "Using ICT simulations to show how some machines do work is recommended",
+    "periods": 20,
+    "note": [
+      "Derivation of P.E. = mgh and K.E= 1/2 mv^2 is not required, but only the use of these equations in calculating P.E and K.E is recommended"
+    ]
+  },
+  {
+    "class": "Senior 2",
+    "term": "1",
+    "theme": "Mechanics and properties of matter",
+    "topic": "Turning Effect of Forces, Centre of Gravity and Stability",
+    "competency": "The learner should be able to investigate the relation between turning effect of forces and stability of bodies.",
+    "learning_outcomes": [
+      {
+        "description": "understand the turning effect of forces and its applications (u, s, v/a)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "understand and apply the concept of centre of gravity (u, s, v/a)",
+        "assessment_type": ["observation", "evaluation of products"]
+      }
+    ],
+    "suggested_learning_activities": [
+      "In groups, learners revisit prior learning and research about balanced moments, in order to: explain the principle of moments using a balance(see-saw), explain turning effect and the meaning of equilibrium",
+      "In pairs, learners practice moments calculations e.g. determine the value of distance d if AB is balanced in the figure below (or similar).",
+      "apply this understanding to practice estimating and determining mass/ weight and distance from the pivot in order to balance",
+      "In pairs, learners investigate and report on how to find the centre of gravity of a lamina of uniform and non-uniform shape and then prepare a report on: the relationship between the position of the centre of gravity of an object to its stability e.g. a bus, a racing car, etc., how the position of the centre of gravity has implications for the design of objects, what happens when bodies in stable, neutral, and unstable equilibrium are displaced"
+    ],
+    "sample_assessment_strategy": [
+      "Listen to group/pair discussions and ask questions to deepen learning.",
+      "Observe how practical work is planned and conducted and pose questions to improve critical thinking, learning, and practical techniques.",
+      "Evaluate the quality of learning through assessment of products: reports on moments, calculations, investigation details, and reports on applications."
+    ],
+    "periods": 16,
+    "note": [
+      "Examples on moments should involve one or two pivots/turning points only.",
+      "Variety of examples and practical activities using a metre rule and a knife edge are recommended."
+    ]
+  },
+  {
+    "class": "Senior 2",
+    "term": "2",
+    "theme": "Mechanics and Properties of Matter",
+    "topic": "Pressure in Solids and Fluids",
+    "competency": "The learner should be able to explain pressure in solids and fluids and identify their applications in everyday life.",
+    "learning_outcomes": [
+      {
+        "description": "understand that pressure is the result of a force applied over an area (u, s)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "understand the effect of depth on the pressure in a fluid and the implications of this (u, s)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "understand the nature of the atmosphere and how atmospheric pressure is measured (u, s)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "know the structure of the atmosphere and the significance of the different layers (k, u, v/a)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "understand the use of the Bernoulli effect in devices like aerofoils and Bunsen burner jets (u)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "understand the concept of sinking and flotation in terms of forces acting on a body submerged in a fluid (u)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "understand and apply the Archimedes' Principle in different situations (u, s, v/a)",
+        "assessment_type": ["observation", "evaluation of products"]
+      }
+    ],
+    "suggested_learning_activities": [
+      "In pairs, learners use blocks of different surface area and plasticine to investigate and then report on the relationship of force and surface area. Solve numerical problems involving force and pressure, using the equation: pressure = force/area e.g. the pressure a drawing pin exerts if its tip area is 1 mm2 and the force used to push it is 2 N, and explain the implications.",
+      "In groups, learners revisit the particle theory, carry out research and explain using a poster or presentation: what happens when a small amount of boiling water is poured into an empty plastic bottle, the cap is placed on tightly, and the water cools.",
+      "In pairs, learners investigate and report on the effect of depth on fluid pressure by making holes in a water bottle at different depths and explain the links between depth, pressure and density and how this may be applied for example in irrigation, water supply, etc.",
+      "In pairs, learners use the expression for fluid pressure i.e. p = hρg to calculate liquid pressure.",
+      "Groups discuss and use learning about pressure to explain why: farm tractors have large back wheels with wide tyres, a hippopotamus can walk in mud easier than a goat, dam walls are built so that they are increasingly thick from top to bottom, rivers flow fastest at narrow sections than at wider sections, though the volume of the liquid does not change",
+      "In groups, learners use Hare's apparatus to, compare the densities of different liquids and explain in a report, using particle theory: which of the liquids investigated is more dense, why the pressure at a depth of 10 m in the sea is higher than at the surface",
+      "In groups, learners carry out investigations (using straws, syringes, siphons, and plastic bottles) and research in order to explain the following in a presentation: how atmospheric pressure is measured using a barometer and why it varies daily, how pressure changes make drinking straw, syringe, siphon and pumps work, how hydraulic machines work, how altitude affects atmospheric pressure and the impact on our breathing, weather, and climate, why a space is left when bottling liquids and why soda bottles do not have flat bottoms.",
+      "In pairs, learners investigate and report, using diagrams, the impact on atmospheric pressure of air moving over a suspended aerofoil section (the Bernoulli effect) and use it to explain why aeroplanes can fly, even though they are denser than air.",
+      "In pairs, learners research the main layers of the atmosphere, and using a poster or presentation, describe their characteristics, the importance of each layer, and explain how: pressure and temperature vary with altitude and region of the Earth, and the impact on weather and climate patterns",
+      "In pairs, learners investigate the forces on a floating body, find the effect of increasing the mass, and explain: why objects weigh less in water than in air and relate this to density",
+      "In pairs, learners investigate the relationship between upthrust and weight of fluid displaced and use the outcomes to inform a presentation on Archimedes' Principle and the law of flotation.",
+      "In groups, learners apply their learning to explain using a poster or presentation, why ships can float in water, though their material has a higher density than that of water."
+    ],
+    "sample_assessment_strategy": [
+      "Listen to groups and pairs of learners as they research investigate, and discuss the meaning of pressure, its causes, effects, and applications. Ask questions to promote deep learning.",
+      "Observe groups and pairs and intervene to check and secure understanding and ensure that all are making progress towards achievement of the learning outcomes",
+      "Evaluate learning by assessment of products: graphs, reports, posters / presentations, and calculations, as well as use of scientific notation, posters and presentations, investigation reports, and annotated diagrams."
+    ],
+    "periods": 16
+  },
+  {
+    "class": "Senior 2",
+    "term": "2",
+    "theme": "Mechanics and properties of matter",
+    "topic": "Mechanical Properties of Materials; Hooke's Law",
+    "competency": "The learner should investigate and understand how the mechanical properties of different materials are related to their applications.",
+    "learning_outcomes": [
+      {
+        "description": "understand how the mechanical properties of common materials can be utilised in physical structures (u, s, v/a)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "understand that the tensile strength of materials is determined by the properties of the substances they are composed of (u)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "understand that heating changes the structure and properties of some materials (u)",
+        "assessment_type": ["observation", "evaluation of products"]
+      }
+    ],
+    "suggested_learning_activities": [
+      "In groups, learners use prior learning and research to explain in a report the meaning of the following characteristics, and name common materials that exhibit these properties: brittle, ductile, strong, hard, malleable, flexible, elastic",
+      "In pairs, learners construct and test to destruction model bridges made out of different materials (wooden sticks, straws, spaghetti) and produce a report in which they: relate physical properties to their characteristics, identify material used in everyday life and research and relate their use to their properties, explain, in terms of particle theory, why heating materials changes their structure and properties",
+      "In pairs, learners research on the stress lines of beams under tension and compressive stress, and then explain how reinforcing concrete changes its properties.",
+      "In groups, learners investigate, research and report on the relationship between the load and the stretching effect on springs or rubber bands of different dimensions and make a presentation to explain: the impact of variation of load on extension of elastic materials in a graph, the concepts of stress and strain, Hooke's law and its relevance to the findings",
+      "In groups, learners investigate the relationship between the diameter of a tube and its tensile strength. On a poster, they report the results and relate the findings to the structure of the bone and to the use of materials in construction.",
+      "In groups, learners investigate and report on the strength of concrete strips made with different proportions of sand and cement, comparing their properties and relating them to the balance of sand/ cement.",
+      "In groups, learners compare the different constructional materials such as glass, wood, ceramics, and steel and make a report."
+    ],
+    "sample_assessment_strategy": [
+      "Listen to pairs and groups of learners as they research, plan and investigate. Intervene where appropriate, to ensure that all are making progress towards achievement of learning outcomes.",
+      "Observe learners engaged in activities and offer guidance to ensure that all participate and acquire the expected knowledge, understanding, and skills.",
+      "Evaluate quality of learning through assessment of products: outcomes of research, posters/presentation s, and investigation reports."
+    ],
+    "periods": 12
+  },
+  {
+    "class": "Senior 2",
+    "term": "2",
+    "theme": "Light",
+    "topic": "Reflection of Light by Curved Surfaces",
+    "competency": "The learner should understand how concave and convex mirrors form images, and also be able to describe the uses of these mirrors in everyday life.",
+    "learning_outcomes": [
+      {
+        "description": "Understand reflection of light and the formation of images by curved mirrors (u)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "Use ray diagrams to show how images are formed by curved mirrors and the nature of the images (s)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "Determine the focal length of concave mirrors using a variety of methods. (s, gs)",
+        "assessment_type": ["observation", "evaluation of products"]
+      }
+    ],
+    "suggested_learning_activities": [
+      "In groups, learners investigate what happens to the reflection when an object is placed at different distances from a curved mirror, and then record results in a table.",
+      "In pairs, learners research what is meant by focal length (f) and curvature (c) and use ray diagrams to explain how a concave mirror forms images at different positions",
+      "In pairs, learners discuss the characteristics of images formed by curved mirrors and use either side of a shiny spoon (or actual mirrors) to compare and report on the differences between concave and convex mirrors.",
+      "In groups, learners determine the focal length of concave mirrors and make reports.",
+      "In pairs, learners research on, and explain using diagrams, why curved mirrors are used in optical instruments such as a telescope and in vehicle headlights."
+    ],
+    "sample_assessment_strategy": [
+      "Listen to group and pair discussions and ask probing questions to check understanding and promote critical thinking.",
+      "Observe how learners work together to develop their understanding about reflection. Intervene to steer activities as necessary.",
+      "Evaluate the quality of learning through assessment of products, and ensure that learners are making progress toward the learning outcomes and are gaining expected knowledge, understanding, and skills."
+    ],
+    "periods": 8,
+    "note": [
+      "The relation r=2f should not be derived.",
+      "Image distance should be obtained by scale drawing only and not calculated from the mirror formula.",
+      "Experimental determination of focal length of convex mirrors is not required."
+    ]
+  },
+  {
+    "class": "Senior 2",
+    "term": "3",
+    "theme": "Magnetism",
+    "topic": "Magnets and Magnetic Field",
+    "competency": "The learner should investigate and understand the properties of magnets and explain how the Earth behaves as a magnet.",
+    "learning_outcomes": [
+      {
+        "description": "know that a small number of materials are magnetic, but most are not (k)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "know how magnets can be made and destroyed (k, s)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "understand the behaviour of magnets and magnetic fields (u)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "know that the Earth is a magnet and how a compass is used to determine direction (k, s)",
+        "assessment_type": ["observation", "evaluation of products"]
+      }
+    ],
+    "suggested_learning_activities": [
+      "In pairs, learners use prior learning to discuss and classify materials in a table into magnetic or non- magnetic: [copper, nickel, iron, steel, cobalt, aluminium, steel, zinc, wood, rubber], then confirm their results with a magnet, and identify any pattern in the results.",
+      "In pairs, learners plan and carry out investigations using magnets and research to discover and report: which poles attract and repel, the law of magnetism, and which pole of a bar magnet is south and which is north",
+      "In groups, learners use iron filings and paper to plot magnetic fields around a bar magnet and individually draw diagrams to show the lines of force.",
+      "In pairs, learners do as follows, and produce a report: investigate the strength of available magnets using a chain of small nails or pins as a measure, investigate what happens when a magnetised needle is suspended freely by a thread, research how the Earth behaves as a magnet and how a magnet can be used to navigate"
+    ],
+    "sample_assessment_strategy": [
+      "Listen to group and pair discussions and ask probing questions to promote critical thinking.",
+      "Observe how learners work together and offer support to improve learning.",
+      "Evaluate the quality of learning through assessment of products: tables, reports, diagrams, and gauge progress towards the learning outcomes."
+    ],
+    "periods": 8,
+    "note": [
+      "Only field lines around magnets should be drawn. Magnetic field lines around current carrying conductors shall be introduced at a later time.",
+      "Concept of magnetic and geographic meridians should be left out."
+    ],
+    "ict_support": "Use of ICT to show appearance of geographical meridian and magnetic meridian and related phenomena."
+  },
+  {
+    "class": "Senior 2",
+    "term": "3",
+    "theme": "Electricity",
+    "topic": "Electrostatics",
+    "competency": "The learner should understand electrostatics and use electrostatics to explain lightning and other phenomena.",
+    "learning_outcomes": [
+      {
+        "description": "understand everyday effects of static electricity and explain them in terms of the build-up and transfer of electrical charge (u, s)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "apply knowledge of electrostatic charge to explain the operation of devices like lightening conductors (u, s, v/a)",
+        "assessment_type": ["observation", "evaluation of products"]
+      }
+    ],
+    "suggested_learning_activities": [
+      "In pairs, learners research on and discuss everyday examples of the effects of static electricity, such as charging of a balloon (to pick up bits of paper), a comb or some clothing, and explain on a poster: how friction generates electric charge that builds up on an insulator, how charging by induction occurs, how charge can be transferred, the particles responsible for the charge",
+      "In groups, learners use a gold leaf electroscope and explain on a poster or presentation how: it is charged, a buildup of charge is transferred, how opposite charges attract and like charges repel",
+      "In pairs, learners research and report on: occurrences of lightning in Uganda, the causes of lightening (a static discharge that builds up due to friction when bodies of air pass over each other) and how lightening conductors work, how to stay safe in a thunderstorm"
+    ],
+    "sample_assessment_strategy": [
+      "Listen to group and pair discussions; encouraging the use of prior learning, and asking probing questions to promote new thinking and deepen learning.",
+      "Observe how learners work, and intervene to boost understanding of electrostatics",
+      "Assess products to ensure that learners gain expected knowledge, understanding, and skills and are all making progress towards achievement of learning outcomes."
+    ],
+    "periods": 8,
+    "note": "The Faraday ice pail experiment and van der Graaf generator should be left out.",
+    "ict_support": "Use of internet to search for the recent occurrence of lightning in Uganda and the human casualties involved."
+  },
+  {
+    "class": "Senior 2",
+    "term": "3",
+    "theme": "Earth and Space Physics",
+    "topic": "The Solar System",
+    "competency": "The learner should understand the relative movement of the earth and moon in relation to the sun and explain the consequences for the Earth.",
+    "learning_outcomes": [
+      {
+        "description": "know the relative sizes, positions, and motions of the earth, sun and moon (k, u)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "understand how day and night occur and demonstrate the phases of the moon (u, s)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "understand the roles of the sun, earth and moon in explaining time, seasons, eclipses, and ocean tides (k, u, gs)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "know the components of the solar system and their positions (k)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "know the main characteristics of the inner and outer planets in the solar system (k)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "understand the various views about the origin and structure of the universe (k, v/a)",
+        "assessment_type": ["observation", "evaluation of products"]
+      }
+    ],
+    "suggested_learning_activities": [
+      "In pairs, learners research and explain on a poster; how the Earth orbits around the sun and the moon around the Earth and the time taken for these orbits, the cause of day and night, why the shape of the moon appears to change over a period of time when viewed from the Earth, how the tilt of the Earth gives rise to seasons in some parts of the world, the implications of the above for activities on Earth",
+      "In pairs, learners use a model to explain how the earth and moon move relative to the sun and use it to explain eclipses.",
+      "In groups, learners research, discuss and report on the connection between the moon and ocean tides.",
+      "In pairs, learners research and report on: the components of the solar system, and make a scale model of the planets and place them in order showing their relative distance from the Sun, the main characteristics of the inner four and outer four planets, why the Earth is the only planet which supports life",
+      "In groups, learners research, discuss and explain, using an appropriate medium: the asteroid belt and where it is found in the Solar System, the origin and structure of the universe"
+    ],
+    "sample_assessment_strategy": [
+      "Listen to group and pair discussions, asking probing questions to promote thinking, and ensure that learners gain expected knowledge, understanding, and skills.",
+      "Observe learners working together, providing guidance to ensure all grasp concepts.",
+      "Evaluate quality of learning through assessment of products: posters, planet models, and reports; gauge progress towards the Learning Outcomes."
+    ],
+    "periods": 18,
+    "note": [
+      "use of ICT animations is required",
+      "the use of a globe and torch is recommended"
+    ],
+    "ict_support": "The Learner can use Internet research to study about the relative positions of the sun, moon, and earth and the phases of the moon and the solar system."
+  }
+]

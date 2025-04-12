@@ -1,0 +1,212 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Schemes of Work</h1>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createSchemeModal">
+            Create New Scheme
+        </button>
+    </div>
+    
+    <!-- Create Scheme Modal -->
+    <div class="modal fade" id="createSchemeModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create New Scheme of Work</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="createSchemeForm">
+                        <div class="mb-3">
+                            <label for="subject" class="form-label">Subject</label>
+                            <select class="form-select" id="subject" name="subject" required>
+                                <option value="">Select Subject</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="grade" class="form-label">Class</label>
+                            <select class="form-select" id="grade" name="grade" required disabled>
+                                <option value="">Select Class</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="term" class="form-label">Term</label>
+                            <select class="form-select" id="term" name="term" required disabled>
+                                <option value="">Select Term</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="duration" class="form-label">Duration</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="start_week" class="form-label">Start Week</label>
+                                    <select class="form-select" id="start_week" name="start_week" required>
+                                        {% for i in range(1, 15) %}
+                                            <option value="{{ i }}">Week {{ i }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="end_week" class="form-label">End Week</label>
+                                    <select class="form-select" id="end_week" name="end_week" required>
+                                        {% for i in range(1, 15) %}
+                                            <option value="{{ i }}">Week {{ i }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="generateScheme">
+                        Generate Scheme
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Modal -->
+    <div class="modal fade" id="loadingModal" data-bs-backdrop="static" tabindex="-1">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <div class="spinner-border text-primary mb-2" role="status"></div>
+                    <p class="mb-0">Generating scheme of work...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if schemes %}
+        <div class="row">
+            {% for scheme in schemes %}
+                <div class="col-md-6 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ scheme.title }}</h5>
+                            <p class="card-text">
+                                <strong>Subject:</strong> {{ scheme.subject }}<br>
+                                <strong>Grade Level:</strong> {{ scheme.grade_level }}<br>
+                                <strong>Term:</strong> {{ scheme.term }}
+                            </p>
+                            <a href="{{ url_for('schemes.view_scheme', scheme_id=scheme.id) }}" 
+                               class="btn btn-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info">
+            No schemes of work created yet. Create your first scheme!
+        </div>
+    {% endif %}
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const subjectSelect = document.getElementById('subject');
+    const gradeSelect = document.getElementById('grade');
+    const termSelect = document.getElementById('term');
+    const durationSelect = document.getElementById('duration');
+    
+    // Load subjects on page load
+    fetch('/api/subjects')
+        .then(response => response.json())
+        .then(subjects => {
+            subjects.forEach(subject => {
+                const option = new Option(subject, subject);
+                subjectSelect.add(option);
+            });
+        });
+    
+    // Update available grades when subject changes
+    subjectSelect.addEventListener('change', function() {
+        if (this.value) {
+            fetch(`/api/grades/${this.value}`)
+                .then(response => response.json())
+                .then(grades => {
+                    // Enable and populate grade select
+                    gradeSelect.disabled = false;
+                    gradeSelect.innerHTML = '<option value="">Select Class</option>';
+                    grades.forEach(grade => {
+                        // Format grade name for display (e.g., "senior1" -> "Senior 1")
+                        const displayName = grade.replace(/senior(\d)/, 'Senior $1');
+                        const option = new Option(displayName, grade);
+                        gradeSelect.add(option);
+                    });
+                    
+                    // Reset term select
+                    termSelect.disabled = true;
+                    termSelect.innerHTML = '<option value="">Select Term</option>';
+                });
+        }
+    });
+    
+    // Update available terms when grade changes
+    gradeSelect.addEventListener('change', function() {
+        if (this.value) {
+            fetch(`/api/syllabus/${subjectSelect.value}/${this.value}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Enable and populate term select
+                    termSelect.disabled = false;
+                    termSelect.innerHTML = '<option value="">Select Term</option>';
+                    data.terms.forEach(term => {
+                        // Format term name for display (e.g., "term1" -> "Term 1")
+                        const displayName = `Term ${term}`;
+                        const option = new Option(displayName, term);
+                        termSelect.add(option);
+                    });
+                });
+        }
+    });
+    
+    // Handle scheme generation
+    document.getElementById('generateScheme').addEventListener('click', function() {
+        const formData = {
+            subject: subjectSelect.value,
+            grade: gradeSelect.value,
+            term: termSelect.value,
+            start_week: document.getElementById('start_week').value,
+            end_week: document.getElementById('end_week').value
+        };
+        
+        // Validate week selection
+        if (parseInt(formData.end_week) <= parseInt(formData.start_week)) {
+            alert('End week must be after start week');
+            return;
+        }
+
+        // Hide create modal and show loading modal
+        const createModal = bootstrap.Modal.getInstance(document.getElementById('createSchemeModal'));
+        createModal.hide();
+        const loadingModal = new bootstrap.Modal(document.getElementById('loadingModal'));
+        loadingModal.show();
+        
+        // Generate scheme
+        fetch('/api/generate-scheme', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            loadingModal.hide();
+            if (data.success) {
+                window.location.href = `/schemes/${data.scheme_id}`;
+            } else {
+                alert('Error generating scheme: ' + data.error);
+            }
+        });
+    });
+});
+</script>
+{% endblock %} 

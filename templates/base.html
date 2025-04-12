@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Teacher's Lesson Automation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .sidebar {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: -240px; /* Hide by default on mobile */
+            width: 240px;
+            z-index: 1031; /* Above top navbar */
+            padding: 48px 0 0;
+            box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+            background-color: #343a40;
+            transition: left 0.3s ease;
+        }
+        
+        .sidebar.show {
+            left: 0;
+        }
+        
+        /* User info in sidebar */
+        .sidebar .text-center h6 {
+            color: #fff;
+            margin-bottom: 0;
+        }
+        
+        .sidebar .text-center small {
+            color: rgba(255,255,255,.6);
+        }
+        
+        .sidebar-sticky {
+            position: relative;
+            top: 0;
+            height: calc(100vh - 48px);
+            padding-top: .5rem;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        
+        .sidebar .nav-link {
+            font-weight: 500;
+            color: rgba(255,255,255,.9);
+            padding: 1rem 1.5rem;
+            margin: 0.2rem 1rem;
+            border-radius: 0.25rem;
+        }
+        
+        .sidebar .nav-link.active {
+            color: #fff;
+            background: rgba(255,255,255,.2);
+            font-weight: 600;
+        }
+        
+        .sidebar .nav-link:hover {
+            color: #fff;
+            background: rgba(255,255,255,.15);
+        }
+        
+        .sidebar-heading {
+            font-size: .75rem;
+            text-transform: uppercase;
+            padding: 1rem;
+            color: rgba(255,255,255,.7);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        .main-content {
+            margin-left: 0;
+            padding: 20px;
+            transition: margin-left 0.3s ease;
+        }
+        
+        .top-navbar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 1030;
+            background-color: #343a40;
+            padding: 0.5rem 1rem;
+        }
+        
+        .dashboard-card {
+            transition: transform 0.2s;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-card {
+            border-left: 4px solid;
+            border-radius: 4px;
+        }
+        
+        /* Logout button styling */
+        .sidebar .btn-outline-danger {
+            color: rgba(255,255,255,.9);
+            border-color: rgba(255,255,255,.3);
+        }
+        
+        .sidebar .btn-outline-danger:hover {
+            color: #fff;
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+        
+        /* Subject-specific colors */
+        .Physics .context-header {
+            background-color: #e3f2fd;
+        }
+        
+        .Chemistry .context-header {
+            background-color: #f3e5f5;
+        }
+        
+        .Mathematics .context-header {
+            background-color: #e8f5e9;
+        }
+        
+        /* Question type indicators */
+        .numerical-question .card-header {
+            border-left: 4px solid #2196f3;
+        }
+        
+        .theoretical-question .card-header {
+            border-left: 4px solid #4caf50;
+        }
+        
+        .practical-question .card-header {
+            border-left: 4px solid #ff9800;
+        }
+        
+        /* Solution steps styling */
+        .solution-steps {
+            background-color: #f5f5f5;
+            border-radius: 4px;
+            padding: 1rem;
+        }
+        
+        .solution-steps ol {
+            counter-reset: step;
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .solution-steps li {
+            counter-increment: step;
+            padding-left: 2rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+        
+        .solution-steps li::before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            width: 1.5rem;
+            height: 1.5rem;
+            background-color: #2196f3;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 1.5rem;
+            font-size: 0.8rem;
+        }
+        
+        /* Hamburger menu for mobile */
+        .navbar-toggler {
+            padding: 0.25rem 0.75rem;
+            border: 1px solid rgba(255,255,255,.1);
+            border-radius: 0.25rem;
+            display: block;
+        }
+        
+        /* Responsive adjustments */
+        @media (min-width: 768px) {
+            .sidebar {
+                left: 0;
+            }
+            
+            .main-content {
+                margin-left: 240px;
+            }
+            
+            .top-navbar {
+                left: 240px;
+            }
+            
+            .navbar-toggler {
+                display: none;
+            }
+        }
+        
+        /* Improve touch targets for mobile */
+        .nav-link {
+            padding: 1rem 1.5rem;
+            margin: 0.2rem 1rem;
+        }
+        
+        .btn {
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Card improvements for mobile */
+        .card {
+            margin-bottom: 1rem;
+        }
+        
+        /* Table responsiveness */
+        .table-responsive {
+            margin-bottom: 1rem;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        /* Improved spacing for mobile */
+        .container {
+            padding-top: 60px;
+        }
+        
+        /* Mobile-friendly form elements */
+        input, select, textarea {
+            font-size: 16px !important; /* Prevent zoom on iOS */
+        }
+        
+        /* Floating hamburger button for mobile */
+        .floating-menu-btn {
+            display: none;  /* Hidden by default */
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #343a40;
+            color: white;
+            border: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 1040;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .floating-menu-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .floating-menu-btn i {
+            font-size: 1.5rem;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 767.98px) {
+            .floating-menu-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .navbar-toggler {
+                display: none;  /* Hide the original toggler */
+            }
+
+            .sidebar {
+                left: -100%;  /* Start completely off-screen */
+                width: 80%;   /* Take up most of the screen */
+                max-width: 300px;
+                z-index: 1050; /* Above the floating button */
+            }
+
+            .sidebar.show {
+                left: 0;
+            }
+
+            /* Adjust main content padding for floating button */
+            .main-content {
+                padding-bottom: 80px;
+            }
+        }
+
+        /* Overlay styling */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1045;
+            backdrop-filter: blur(2px);
+        }
+
+        .sidebar-overlay.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    {% if not current_user.is_authenticated %}
+        <!-- Login/Signup Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="{{ url_for('index') }}">Teacher's Assistant</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('auth.signup') }}">Sign Up</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    {% else %}
+        <!-- Authenticated Dashboard Layout -->
+        <!-- Mobile navbar -->
+        <nav class="navbar top-navbar">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" id="sidebarToggle">
+                    <i class="bi bi-list text-white"></i>
+                </button>
+                <span class="navbar-brand mb-0 h1 text-white">Teacher's Assistant</span>
+                <div class="d-flex">
+                    <a href="#" class="btn btn-outline-light btn-sm me-2">
+                        <i class="bi bi-bell"></i>
+                    </a>
+                    <a href="#" class="btn btn-outline-light btn-sm">
+                        <i class="bi bi-gear"></i>
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Sidebar -->
+        <nav class="col-md-3 col-lg-2 d-md-block sidebar" id="sidebar">
+            <div class="sidebar-sticky">
+                <div class="text-center p-3 mb-3">
+                    <h6>{{ current_user.name }}</h6>
+                    <small>{{ current_user.school }}</small>
+                </div>
+
+                {% if current_user.role == 'admin' %}
+                <!-- Admin Navigation -->
+                <ul class="nav flex-column">
+                    <div class="sidebar-heading">Administration</div>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'admin.dashboard' %}active{% endif %}" 
+                           href="{{ url_for('admin.dashboard') }}">
+                            <i class="bi bi-speedometer2 me-2"></i>
+                            Dashboard
+                        </a>
+                    </li>
+                    <div class="sidebar-heading">Content Management</div>
+                    <li class="nav-item">
+                        <a class="nav-link {% if 'question_bank' in request.endpoint %}active{% endif %}" 
+                           href="{{ url_for('questions.question_bank') }}">
+                            <i class="bi bi-journal-text me-2"></i>
+                            Question Bank
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if 'users' in request.endpoint %}active{% endif %}" 
+                           href="{{ url_for('admin.users') }}">
+                            <i class="bi bi-people me-2"></i>
+                            User Management
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if 'resources' in request.endpoint %}active{% endif %}" 
+                           href="{{ url_for('admin.resources') }}">
+                            <i class="bi bi-folder me-2"></i>
+                            Teaching Resources
+                        </a>
+                    </li>
+                    <div class="sidebar-heading">System</div>
+                    <li class="nav-item">
+                        <a class="nav-link {% if 'settings' in request.endpoint %}active{% endif %}" 
+                           href="{{ url_for('admin.settings') }}">
+                            <i class="bi bi-gear me-2"></i>
+                            Settings
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if 'logs' in request.endpoint %}active{% endif %}" 
+                           href="{{ url_for('admin.logs') }}">
+                            <i class="bi bi-journal-text me-2"></i>
+                            System Logs
+                        </a>
+                    </li>
+                </ul>
+                {% else %}
+                <!-- Teacher Navigation -->
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('dashboard') }}">
+                            <i class="bi bi-speedometer2"></i>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if 'schemes.' in request.endpoint %}active{% endif %}" 
+                           href="{{ url_for('schemes.list_schemes') }}">
+                            <i class="bi bi-journal-bookmark me-2"></i>
+                            Schemes of Work
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if 'lessons.' in request.endpoint %}active{% endif %}" 
+                           href="{{ url_for('lessons.list_lessons') }}">
+                            <i class="fas fa-chalkboard-teacher"></i> Lesson Plans
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('resources.list') }}">
+                            <i class="bi bi-folder2 me-2"></i>
+                            My Resources
+                        </a>
+                    </li>
+                   
+                    <!-- Question Bank Section -->
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('assessments.list_assessments') }}">
+                            <i class="bi bi-plus-circle me-2"></i>
+                            Create Assessment
+                        </a>
+                    </li>
+                    <div class="nav-item">
+                        <a class="nav-link {{ 'active' if request.endpoint.startswith('teachers.') }}" 
+                           href="{{ url_for('teachers.content_dashboard') }}">
+                            <i class="bi bi-mortarboard me-2"></i>
+                            Teaching Content
+                        </a>
+                    </div>
+                </ul>
+                {% endif %}
+                
+                <div class="position-absolute bottom-0 start-0 w-100 p-3">
+                    <a href="{{ url_for('logout') }}" class="btn btn-outline-danger w-100">
+                        <i class="bi bi-box-arrow-right me-2"></i>Logout
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Add the floating button after the sidebar -->
+        {% if current_user.is_authenticated %}
+            <button class="floating-menu-btn" id="floatingMenuBtn" type="button" aria-label="Menu">
+                <i class="bi bi-list"></i>
+            </button>
+
+            <!-- Add overlay div -->
+            <div class="sidebar-overlay" id="sidebarOverlay"></div>
+        {% endif %}
+    {% endif %}
+
+    <!-- Main content area -->
+    <div class="{% if current_user.is_authenticated %}main-content{% else %}container mt-4{% endif %}">
+        {% if current_user.is_authenticated %}
+            <nav class="navbar top-navbar">
+                <div class="container-fluid">
+                    <span class="navbar-brand mb-0 h1 text-white">Teacher's Assistant</span>
+                    <div class="d-flex">
+                        <a href="#" class="btn btn-outline-light me-2">
+                            <i class="bi bi-bell"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-light">
+                            <i class="bi bi-gear"></i>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        {% endif %}
+        
+        <div class="{% if current_user.is_authenticated %}container mt-5{% endif %}">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-info">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+            {% if not current_user.is_authenticated %}
+                <div class="text-center mt-4">
+                    <a href="{{ url_for('auth.login') }}">Login</a> | 
+                    <a href="{{ url_for('auth.signup') }}">Sign Up</a>
+                </div>
+            {% endif %}
+            
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.x.x/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidebar = document.querySelector('.sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const floatingMenuBtn = document.getElementById('floatingMenuBtn');
+        
+        function toggleSidebar() {
+            sidebar.classList.toggle('show');
+            sidebarOverlay.classList.toggle('show');
+            
+            // Toggle button icon
+            const icon = floatingMenuBtn.querySelector('i');
+            if (sidebar.classList.contains('show')) {
+                icon.classList.remove('bi-list');
+                icon.classList.add('bi-x-lg');
+            } else {
+                icon.classList.remove('bi-x-lg');
+                icon.classList.add('bi-list');
+            }
+        }
+
+        // Event listeners
+        floatingMenuBtn.addEventListener('click', toggleSidebar);
+        sidebarOverlay.addEventListener('click', toggleSidebar);
+
+        // Close sidebar on link click for mobile
+        document.querySelectorAll('.sidebar .nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 768) {
+                    toggleSidebar();
+                }
+            });
+        });
+
+        // Handle resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                sidebar.classList.remove('show');
+                sidebarOverlay.classList.remove('show');
+                const icon = floatingMenuBtn.querySelector('i');
+                icon.classList.remove('bi-x-lg');
+                icon.classList.add('bi-list');
+            }
+        });
+
+        // Handle swipe gestures
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, false);
+
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, false);
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchEndX - touchStartX;
+
+            if (Math.abs(diff) < swipeThreshold) return;
+
+            if (diff > 0) { // Swipe right
+                if (!sidebar.classList.contains('show')) {
+                    toggleSidebar();
+                }
+            } else { // Swipe left
+                if (sidebar.classList.contains('show')) {
+                    toggleSidebar();
+                }
+            }
+        }
+    });
+    </script>
+</body>
+</html> 

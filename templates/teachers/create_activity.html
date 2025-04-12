@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">Create Activity</h4>
+                </div>
+                <div class="card-body">
+                    <form id="activityForm">
+                        <!-- Basic Details -->
+                        <div class="mb-3">
+                            <label class="form-label">Subject</label>
+                            <select class="form-select" name="subject" required>
+                                <option value="">Select Subject</option>
+                                <option value="Physics">Physics</option>
+                                <option value="Mathematics">Mathematics</option>
+                                <option value="Chemistry">Chemistry</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Topic</label>
+                            <input type="text" class="form-control" name="topic" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Grade Level</label>
+                            <select class="form-select" name="grade_level" required>
+                                <option value="">Select Grade</option>
+                                <option value="S.1">Senior 1</option>
+                                <option value="S.2">Senior 2</option>
+                                <option value="S.3">Senior 3</option>
+                                <option value="S.4">Senior 4</option>
+                                <option value="S.5">Senior 5</option>
+                                <option value="S.6">Senior 6</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Activity Type</label>
+                            <select class="form-select" name="activity_type" required>
+                                <option value="individual">Individual Exercise</option>
+                                <option value="group">Group Work</option>
+                                <option value="experiment">Laboratory Experiment</option>
+                                <option value="project">Mini Project</option>
+                                <option value="discussion">Guided Discussion</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Duration (minutes)</label>
+                            <input type="number" class="form-control" name="duration" min="10" max="60" value="20">
+                        </div>
+
+                        <!-- Components to Include -->
+                        <div class="mb-3">
+                            <label class="form-label">Components to Include</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="include_objectives" id="include_objectives" checked>
+                                <label class="form-check-label" for="include_objectives">Learning Objectives</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="include_materials" id="include_materials" checked>
+                                <label class="form-check-label" for="include_materials">Required Materials</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="include_steps" id="include_steps" checked>
+                                <label class="form-check-label" for="include_steps">Step-by-step Instructions</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="include_assessment" id="include_assessment" checked>
+                                <label class="form-check-label" for="include_assessment">Assessment Criteria</label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            Generate Activity
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('activityForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    formData.append('content_type', 'activity');
+    
+    try {
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Generating...';
+        
+        const response = await fetch('/teaching/generate-content', {
+            method: 'POST',
+            body: formData
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const result = await response.json();
+        if (result.success) {
+            window.location.href = result.redirect_url;
+        } else {
+            throw new Error(result.error || 'Failed to generate activity');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error generating activity: ' + error.message);
+    } finally {
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Generate Activity';
+    }
+});
+</script>
+{% endblock %} 

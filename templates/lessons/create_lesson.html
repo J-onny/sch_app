@@ -1,0 +1,135 @@
+<!-- Create New Lesson Plan Modal -->
+<div class="modal fade" id="createLessonModal" tabindex="-1" aria-labelledby="createLessonModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createLessonModalLabel">Create New Lesson Plan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="lessonPlanForm">
+                    <!-- Subject Dropdown -->
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Subject</label>
+                        <div class="dropdown">
+                            <button class="form-control text-start dropdown-toggle" type="button" id="subjectDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                Select Subject
+                            </button>
+                            <ul class="dropdown-menu w-100" aria-labelledby="subjectDropdown">
+                                <li><a class="dropdown-item" href="#" data-value="Mathematics">Mathematics</a></li>
+                                <li><a class="dropdown-item" href="#" data-value="English">English</a></li>
+                                <li><a class="dropdown-item" href="#" data-value="Science">Science</a></li>
+                            </ul>
+                            <input type="hidden" name="subject" id="subjectInput">
+                        </div>
+                    </div>
+
+                    <!-- Grade Dropdown -->
+                    <div class="mb-3">
+                        <label for="grade" class="form-label">Grade</label>
+                        <div class="dropdown">
+                            <button class="form-control text-start dropdown-toggle" type="button" id="gradeDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                Select Grade
+                            </button>
+                            <ul class="dropdown-menu w-100" aria-labelledby="gradeDropdown">
+                                <li><a class="dropdown-item" href="#" data-value="S.1">S.1</a></li>
+                                <li><a class="dropdown-item" href="#" data-value="S.2">S.2</a></li>
+                                <li><a class="dropdown-item" href="#" data-value="S.3">S.3</a></li>
+                                <li><a class="dropdown-item" href="#" data-value="S.4">S.4</a></li>
+                            </ul>
+                            <input type="hidden" name="grade" id="gradeInput">
+                        </div>
+                    </div>
+
+                    <!-- Topic Input -->
+                    <div class="mb-3">
+                        <label for="topic" class="form-label">Topic</label>
+                        <input type="text" class="form-control" id="topic" name="topic" required>
+                    </div>
+
+                    <!-- Duration, Time and Term in one row -->
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label for="duration" class="form-label">Duration (minutes)</label>
+                            <input type="number" class="form-control" id="duration" name="duration" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="time" class="form-label">Time</label>
+                            <input type="time" class="form-control" id="time" name="time" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="term" class="form-label">Term</label>
+                            <div class="dropdown">
+                                <button class="form-control text-start dropdown-toggle" type="button" id="termDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    ONE
+                                </button>
+                                <ul class="dropdown-menu w-100" aria-labelledby="termDropdown">
+                                    <li><a class="dropdown-item" href="#" data-value="ONE">ONE</a></li>
+                                    <li><a class="dropdown-item" href="#" data-value="TWO">TWO</a></li>
+                                    <li><a class="dropdown-item" href="#" data-value="THREE">THREE</a></li>
+                                </ul>
+                                <input type="hidden" name="term" id="termInput" value="ONE">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="generateLessonBtn">Generate Lesson Plan</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle dropdown selections
+    document.querySelectorAll('.dropdown-item').forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            const dropdownButton = this.closest('.dropdown').querySelector('.dropdown-toggle');
+            const hiddenInput = this.closest('.dropdown').querySelector('input[type="hidden"]');
+            
+            dropdownButton.textContent = this.textContent;
+            hiddenInput.value = this.dataset.value;
+        });
+    });
+
+    // Handle form submission
+    document.getElementById('generateLessonBtn').addEventListener('click', function() {
+        const form = document.getElementById('lessonPlanForm');
+        if (form.checkValidity()) {
+            const formData = new FormData(form);
+            // Add your form submission logic here
+        } else {
+            form.reportValidity();
+        }
+    });
+});
+</script>
+
+<style>
+.modal-dialog {
+    max-width: 500px;
+}
+
+.dropdown-menu {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.dropdown-item {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+.form-control.dropdown-toggle::after {
+    float: right;
+    margin-top: 8px;
+}
+</style> 

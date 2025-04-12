@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h3>Edit Question</h3>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('questions.edit_question', question_id=question.id) }}">
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label class="form-label">Subject</label>
+                        <select class="form-select" name="subject" id="subjectSelect" required 
+                                onchange="this.form.action='{{ url_for('questions.edit_question', question_id=question.id) }}'; this.form.method='GET'; this.form.submit();">
+                            <option value="">Select Subject</option>
+                            {% for subject in subjects %}
+                            <option value="{{ subject }}" {% if subject == selected_subject %}selected{% endif %}>
+                                {{ subject }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Grade Level</label>
+                        <select class="form-select" name="grade_level" id="gradeSelect" required 
+                                {% if not selected_subject %}disabled{% endif %}
+                                onchange="this.form.action='{{ url_for('questions.edit_question', question_id=question.id) }}'; this.form.method='GET'; this.form.submit();">
+                            <option value="">Select Grade</option>
+                            {% if grades %}
+                                {% for grade in grades %}
+                                <option value="{{ grade }}" {% if grade == selected_grade %}selected{% endif %}>
+                                    {{ grade|replace('_', ' ')|title }}
+                                </option>
+                                {% endfor %}
+                            {% endif %}
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Topic</label>
+                        <select class="form-select" name="topic" id="topicSelect" required 
+                                {% if not selected_grade %}disabled{% endif %}>
+                            <option value="">Select Topic</option>
+                            {% if topics %}
+                                {% for topic in topics %}
+                                <option value="{{ topic }}" {% if topic == question.topic %}selected{% endif %}>
+                                    {{ topic }}
+                                </option>
+                                {% endfor %}
+                            {% endif %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label class="form-label">Difficulty</label>
+                        <select class="form-select" name="difficulty" required>
+                            <option value="easy" {% if question.difficulty == 'easy' %}selected{% endif %}>Easy</option>
+                            <option value="medium" {% if question.difficulty == 'medium' %}selected{% endif %}>Medium</option>
+                            <option value="hard" {% if question.difficulty == 'hard' %}selected{% endif %}>Hard</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Question Type</label>
+                        <select class="form-select" name="question_type" id="questionType" required>
+                            <option value="mcq" {% if question.question_type == 'mcq' %}selected{% endif %}>Multiple Choice</option>
+                            <option value="short_answer" {% if question.question_type == 'short_answer' %}selected{% endif %}>Short Answer</option>
+                            <option value="long_answer" {% if question.question_type == 'long_answer' %}selected{% endif %}>Long Answer</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Question Content</label>
+                    <textarea class="form-control" name="content" rows="4" required>{{ question.content }}</textarea>
+                </div>
+
+                {% if question.question_type == 'mcq' %}
+                <div id="mcqOptionsSection" class="mb-3">
+                    <label class="form-label">Answer Options</label>
+                    <div id="optionsContainer">
+                        {% for option in question.options %}
+                        <div class="input-group mb-2">
+                            <div class="input-group-text">
+                                <input type="radio" name="correct_option" value="{{ loop.index0 }}" 
+                                       class="form-check-input mt-0" {% if option.is_correct %}checked{% endif %} required>
+                            </div>
+                            <input type="text" class="form-control" name="options[]" 
+                                   value="{{ option.option_text }}" required>
+                            <button type="button" class="btn btn-outline-danger" onclick="this.parentElement.remove()">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <button type="button" class="btn btn-outline-secondary btn-sm mt-2" onclick="addOption()">
+                        <i class="bi bi-plus-circle me-1"></i>Add Option
+                    </button>
+                </div>
+                {% endif %}
+
+                <div class="mb-3">
+                    <label class="form-label">Solution/Marking Guide</label>
+                    <textarea class="form-control" name="solution" rows="4">{{ question.solution }}</textarea>
+                </div>
+
+                <div class="text-end">
+                    <a href="{{ url_for('questions.question_bank') }}" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-primary">Update Question</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+function addOption() {
+    const container = document.getElementById('optionsContainer');
+    const optionCount = container.children.length;
+    
+    const optionDiv = document.createElement('div');
+    optionDiv.className = 'input-group mb-2';
+    optionDiv.innerHTML = `
+        <div class="input-group-text">
+            <input type="radio" name="correct_option" value="${optionCount}" 
+                   class="form-check-input mt-0" required>
+        </div>
+        <input type="text" class="form-control" name="options[]" 
+               placeholder="Enter option ${optionCount + 1}" required>
+        <button type="button" class="btn btn-outline-danger" onclick="this.parentElement.remove()">
+            <i class="bi bi-trash"></i>
+        </button>
+    `;
+    
+    container.appendChild(optionDiv);
+}
+
+// Make function available globally
+window.addOption = addOption;
+</script>
+{% endblock %} 

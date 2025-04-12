@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1>{{ content.title }}</h1>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary" onclick="saveContent()">
+                        <i class="fas fa-save"></i> Save
+                    </button>
+                    <a href="{{ url_for('teachers.edit_content', content_id=content.id) }}" class="btn btn-secondary">
+                        <i class="fas fa-edit"></i> Edit
+                    </a>
+                    <button type="button" class="btn btn-success" onclick="exportContent()">
+                        <i class="fas fa-file-export"></i> Export
+                    </button>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <strong>Subject:</strong> {{ content.subject }}
+                        </div>
+                        <div class="col-md-4">
+                            <strong>Grade Level:</strong> {{ content.grade_level }}
+                        </div>
+                        <div class="col-md-4">
+                            <strong>Type:</strong> {{ content.content_type|title }}
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    {% if content.content_type == 'lesson' %}
+                        {% include 'teachers/content_types/lesson.html' %}
+                    {% elif content.content_type == 'visual' %}
+                        {% include 'teachers/content_types/visual.html' %}
+                    {% elif content.content_type == 'activity' %}
+                        {% include 'teachers/content_types/activity.html' %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add JavaScript for save and export functionality -->
+<script>
+function saveContent() {
+    // Create the content data object using a separate variable
+    const contentData = {
+        title: "{{ content.title|escapejs }}",
+        subject: "{{ content.subject|escapejs }}",
+        grade_level: "{{ content.grade_level|escapejs }}",
+        content_type: "{{ content.content_type|escapejs }}",
+        content: JSON.parse('{{ content.content|tojson|safe }}')
+    };
+
+    fetch("{{ url_for('teachers.save_content', content_id=content.id) }}", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(contentData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            alert('Content saved successfully!');
+        } else {
+            alert('Error saving content: ' + data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error saving content');
+    });
+}
+
+function exportContent() {
+    // Create the content data object using a separate variable
+    const contentData = {
+        title: "{{ content.title|escapejs }}",
+        subject: "{{ content.subject|escapejs }}",
+        grade_level: "{{ content.grade_level|escapejs }}",
+        content_type: "{{ content.content_type|escapejs }}",
+        content: JSON.parse('{{ content.content|tojson|safe }}')
+    };
+
+    // Create a Blob with the content
+    const blob = new Blob([JSON.stringify(contentData, null, 2)], { type: 'application/json' });
+    const url = window.URL.createObjectURL(blob);
+    
+    // Create download link
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `content_${contentData.title}.json`;
+    document.body.appendChild(a);
+    a.click();
+    
+    // Cleanup
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+}
+</script>
+{% endblock %} 

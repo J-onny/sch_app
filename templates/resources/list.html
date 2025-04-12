@@ -1,0 +1,303 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Teaching Resources</h1>
+        {% if current_user.role == 'admin' %}
+        <a href="{{ url_for('admin.resources') }}" class="btn btn-primary">
+            <i class="bi bi-gear me-2"></i>Manage Resources
+        </a>
+        {% endif %}
+    </div>
+
+    <!-- Search and Filter -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form class="row g-3" method="GET" action="{{ url_for('resources.topic_resources', topic_id=0) }}">
+                <div class="col-md-4">
+                    <input type="text" name="search" class="form-control" 
+                           placeholder="Search resources..." value="{{ request.args.get('search', '') }}">
+                </div>
+                <div class="col-md-3">
+                    <select name="type" class="form-select">
+                        <option value="">All Types</option>
+                        <option value="video" {% if request.args.get('type') == 'video' %}selected{% endif %}>Videos</option>
+                        <option value="document" {% if request.args.get('type') == 'document' %}selected{% endif %}>Documents</option>
+                        <option value="link" {% if request.args.get('type') == 'link' %}selected{% endif %}>Links</option>
+                        <option value="interactive" {% if request.args.get('type') == 'interactive' %}selected{% endif %}>Interactive</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select name="subject" class="form-select">
+                        <option value="">All Subjects</option>
+                        {% if current_user.subject %}
+                        <option value="{{ current_user.subject }}" {% if not request.args.get('subject') %}selected{% endif %}>
+                            {{ current_user.subject|title }}
+                        </option>
+                        {% endif %}
+                        <option value="mathematics" {% if request.args.get('subject') == 'mathematics' %}selected{% endif %}>Mathematics</option>
+                        <option value="physics" {% if request.args.get('subject') == 'physics' %}selected{% endif %}>Physics</option>
+                        <option value="chemistry" {% if request.args.get('subject') == 'chemistry' %}selected{% endif %}>Chemistry</option>
+                        <option value="biology" {% if request.args.get('subject') == 'biology' %}selected{% endif %}>Biology</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="bi bi-search me-2"></i>Search
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Resources Grid -->
+    <div class="row g-4">
+        {% for resource in resources %}
+        {% if resource.is_active %}
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100">
+                <!-- Resource Type Badge -->
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span class="badge bg-{{ 'primary' if resource.resource_type == 'document' 
+                                        else 'success' if resource.resource_type == 'video'
+                                        else 'info' if resource.resource_type == 'link'
+                                        else 'warning' }}">
+                        {{ resource.resource_type|title }}
+                    </span>
+                    <small class="text-muted">{{ resource.created_at.strftime('%Y-%m-%d') }}</small>
+                </div>
+
+                <div class="card-body">
+                    <h5 class="card-title">{{ resource.title }}</h5>
+                    <p class="card-text text-muted small">Subject: {{ resource.subject|title }}</p>
+                    <p class="card-text">{{ resource.description|truncate(100) }}</p>
+                    
+                    {% if resource.tags %}
+                    <div class="mb-3">
+                        {% for tag in resource.tags.split(',') %}
+                        <span class="badge bg-secondary me-1">{{ tag.strip() }}</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <div class="d-flex gap-2">
+                        {% if resource.resource_type == 'document' and resource.file_path %}
+                        <button class="btn btn-sm btn-outline-primary preview-btn" 
+                                data-url="{{ url_for('static', filename=('uploads/' + resource.file_path)) }}"
+                                data-title="{{ resource.title }}">
+                            <i class="bi bi-eye me-1"></i>Preview
+                        </button>
+                        <a href="{{ url_for('static', filename='uploads/' + resource.file_path) }}" class="btn btn-sm btn-outline-success" download>
+                            <i class="bi bi-download me-1"></i>Download
+                        </a>
+                        {% elif resource.resource_type in ['video', 'link'] and resource.url %}
+                        <a href="{{ resource.url }}" class="btn btn-sm btn-outline-primary" target="_blank" rel="noopener noreferrer">
+                            <i class="bi bi-box-arrow-up-right me-1"></i>Open
+                        </a>
+                        {% endif %}
+                        <button class="btn btn-sm btn-outline-secondary show-details-btn" data-resource-id="{{ resource.id }}">
+                            <i class="bi bi-info-circle me-1"></i>Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% else %}
+        <div class="col-12">
+            <div class="alert alert-info">
+                <i class="bi bi-info-circle me-2"></i>No resources available for your search criteria.
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination if needed -->
+    {% if pagination and pagination.pages > 1 %}
+    <nav aria-label="Resource navigation" class="mt-4">
+        <ul class="pagination justify-content-center">
+            <li class="page-item {{ 'disabled' if not pagination.has_prev }}">
+                <a class="page-link" href="{{ url_for('resources.list', page=pagination.prev_num, **request.args) if pagination.has_prev else '#' }}">Previous</a>
+            </li>
+            {% for page in pagination.iter_pages() %}
+                {% if page %}
+                    <li class="page-item {{ 'active' if page == pagination.page }}">
+                        <a class="page-link" href="{{ url_for('resources.list', page=page, **request.args) }}">{{ page }}</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled"><span class="page-link">...</span></li>
+                {% endif %}
+            {% endfor %}
+            <li class="page-item {{ 'disabled' if not pagination.has_next }}">
+                <a class="page-link" href="{{ url_for('resources.list', page=pagination.next_num, **request.args) if pagination.has_next else '#' }}">Next</a>
+            </li>
+        </ul>
+    </nav>
+    {% endif %}
+</div>
+
+<!-- Resource Preview Modal -->
+<div class="modal fade" id="previewModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div id="previewContent" class="ratio ratio-16x9">
+                    <!-- Content will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Resource Details Modal -->
+<div class="modal fade" id="detailsModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Resource Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="resourceDetails">
+                <!-- Details will be loaded here -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Add event listeners for details buttons
+    document.querySelectorAll('.show-details-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const resourceId = this.dataset.resourceId;
+            fetch(`/resources/${resourceId}/details`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const detailsHtml = `
+                        <dl class="row">
+                            <dt class="col-sm-4">Title</dt>
+                            <dd class="col-sm-8">${data.title}</dd>
+                            
+                            <dt class="col-sm-4">Subject</dt>
+                            <dd class="col-sm-8">${data.subject}</dd>
+                            
+                            <dt class="col-sm-4">Type</dt>
+                            <dd class="col-sm-8">${data.resource_type}</dd>
+                            
+                            <dt class="col-sm-4">Description</dt>
+                            <dd class="col-sm-8">${data.description || 'No description available'}</dd>
+                            
+                            ${data.tags ? `
+                            <dt class="col-sm-4">Tags</dt>
+                            <dd class="col-sm-8">
+                                ${data.tags.split(',').map(tag => 
+                                    `<span class="badge bg-secondary me-1">${tag.trim()}</span>`
+                                ).join('')}
+                            </dd>
+                            ` : ''}
+                            
+                            ${data.url ? `
+                            <dt class="col-sm-4">URL</dt>
+                            <dd class="col-sm-8">
+                                <a href="${data.url}" target="_blank" rel="noopener noreferrer">${data.url}</a>
+                            </dd>
+                            ` : ''}
+                            
+                            <dt class="col-sm-4">Added</dt>
+                            <dd class="col-sm-8">${new Date(data.created_at).toLocaleDateString()}</dd>
+                        </dl>
+                    `;
+                    
+                    document.getElementById('resourceDetails').innerHTML = detailsHtml;
+                    const modal = new bootstrap.Modal(document.getElementById('detailsModal'));
+                    modal.show();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error loading resource details');
+                });
+        });
+    });
+
+    // Initialize preview buttons
+    const previewModal = new bootstrap.Modal(document.getElementById('previewModal'));
+    
+    document.querySelectorAll('.preview-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const url = this.dataset.url;
+            const title = this.dataset.title;
+            
+            const previewContent = document.getElementById('previewContent');
+            const modalTitle = document.querySelector('#previewModal .modal-title');
+            
+            modalTitle.textContent = title;
+            
+            if (url.match(/\.(pdf)$/i)) {
+                previewContent.innerHTML = `
+                    <object data="${url}" type="application/pdf" width="100%" height="600px">
+                        <p>Unable to display PDF. <a href="${url}" target="_blank">Download</a> instead.</p>
+                    </object>`;
+            } else if (url.match(/\.(jpg|jpeg|png|gif)$/i)) {
+                previewContent.innerHTML = `<img src="${url}" class="img-fluid" alt="${title}">`;
+            } else if (url.match(/\.(mp4|webm)$/i)) {
+                previewContent.innerHTML = `
+                    <video class="w-100" controls>
+                        <source src="${url}">
+                        Your browser does not support the video tag.
+                    </video>`;
+            } else {
+                previewContent.innerHTML = `
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle me-2"></i>
+                        Preview not available for this file type. Please 
+                        <a href="${url}" class="alert-link" download>download</a> 
+                        to view.
+                    </div>`;
+            }
+            
+            previewModal.show();
+        });
+    });
+});
+</script>
+
+<style>
+/* Add these styles for better modal appearance */
+.modal-body {
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+#previewContent {
+    min-height: 400px;
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.badge {
+    font-size: 0.85em;
+}
+
+/* Improve PDF viewer responsiveness */
+object[type="application/pdf"] {
+    width: 100%;
+    height: 70vh;
+}
+</style>
+{% endblock %} 

@@ -1,0 +1,320 @@
+[
+  {
+    "class": "Senior 3",
+    "term": "1",
+    "theme": "Mechanics and Properties of Matter",
+    "topic": "Linear and non-linear motion",
+    "competency": "The learner should be able to devise activities to measure distance and short time intervals, and he/she should be able to use the data to calculate the speed and acceleration of a moving object and explain their implications.",
+    "learning_outcomes": [
+      {
+        "description": "understand and apply the relationship between speed, distance, and time (u, s)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "understand the terms: linear motion, speed, average speed, acceleration, and be able to investigate resistance to motion (u, s)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "know and use the equations of motion (u, s)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "understand the acceleration of bodies moving in a circle and the effect of gravity and air resistance on moving bodies (u, s)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "understand linear momentum and that it is conserved during collisions (u, s)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "understand that momentum is conserved during a collision and the implication of this (u, s, v/a)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "understand and apply Newton's laws of motion (u, s, v/a)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "understand the differences between vector and scalar quantities, and give examples of each (u)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "understand that a number of forces acting on a body can be represented by a single resultant force (u, s)",
+        "assessment_type": ["observation", "evaluation of products"]
+      }
+    ],
+    "suggested_learning_activities": [
+      "In groups, learners plan and carry out an investigation to find the speed of someone walking, running, riding a bicycle, and travelling in a car between two points, using speed = distance/time.",
+      "In pairs, learners: interpret and construct distance/time graphs and velocity-time graphs, calculate the average speed of objects moving between two points, and explain, on a poster, linear motion and the difference between speed and average speed.",
+      "In groups, learners measure acceleration using a ticker timer and explain in a report the graph for uniform acceleration and linear motion.",
+      "In groups, learners use data to solve problems, using the formula v=u+at and other equations.",
+      "In groups, learners plan and report on an investigation into the motion of a body falling in a viscous fluid, and the effects of shape/streamlining on the motion. They should explain distance/time graphs for this motion, and the implications of shape in birds, fish and planes.",
+      "In pairs, learners research and explain on a poster, the speed and acceleration of bodies moving in a circle and describe the effect of gravity and air resistance on the motion",
+      "In groups, learners research what momentum is, and report on their findings and use the relation p=mv in various ways.",
+      "In groups, learners use an air track to investigate and explain to the class the conservation of linear momentum and how it is affected by changes to mass and velocity",
+      "In groups, learners draw on prior learning to explain with a presentation or a poster: the Newton as a unit of force, the effect on velocity of applying forces of different size to objects of different mass, the use of the formula F=ma.",
+      "In pairs, learners research on Newton's laws and their implications and explain the following in a report, with examples: how action and reaction are equal and opposite, the difference between vector and scalar quantities",
+      "In groups, learners use pulleys to investigate and report on the direction and size of the result force when two forces act at right angles on the same object."
+    ],
+    "sample_assessment_strategy": [
+      "Listen to group and pair discussions; asking probing questions to clarify understanding and deepen learning.",
+      "Observe learners carrying out activities, offering advice and guidance to ensure that all engage fully and make good progress.",
+      "Evaluate quality of learning through assessment of reports and ensure progress towards the learning outcomes."
+    ],
+    "ict_support": [
+      "Use a data collection tool such as a motion sensor to capture speeds of everyday events.",
+      "The learner can use spreadsheets to record and analyse experimental data and draw the velocity-time graphs.",
+      "Learner observes a video on collisions and how their effects are minimised."
+    ],
+    "periods": 30,
+    "note": [
+      "The derivation of the equations of motion is not required.",
+      "Numerical problems on motion in a circle are not required.",
+      "Problems related to objects projected at an angle to the horizontal are beyond the scope of this syllabus."
+    ]
+  },
+  {
+    "class": "Senior 3",
+    "term": "1",
+    "theme": "Light",
+    "topic": "Refraction, Dispersion, and Colour",
+    "competency": "The learner should be able to understand the phenomenon of refraction and its effects.",
+    "learning_outcomes": [
+      {
+        "description": "understand that light may be refracted as it passes from one medium to another and that this has both consequences and uses (u, s, v/a)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "understand the concept of refractive index (u, s)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "understand the concept of total internal reflection(u)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "know that white light can be split into coloured light by refraction (k, s)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "know that white light results from the superimposition of light of all colours of the visible spectrum (u, k)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "determine refractive index of glass (s, gs)",
+        "assessment_type": ["observation", "evaluation of products"]
+      }
+    ],
+    "suggested_learning_activities": [
+      "In groups, learners: investigate and explain with diagrams, how a ray of light is refracted as it passes between two adjacent media, explain phenomena such as the apparent bending of a stick in water and determine refractive index of glass",
+      "In groups, learners use light boxes and glass prisms to: investigate and report on total internal reflection and critical angle, explain on a poster how prisms can be used instead of plane mirrors in periscopes",
+      "In groups, learners: investigate and report on the causes of light dispersion and how a prism splits white light into coloured light by refraction, explain dispersion of light, such as oil on water and rainbows",
+      "In groups, learners use light filters to investigate and report on why coloured objects appear coloured.",
+      "In pairs, learners research and report on how a whole range of different colours is shown on a television screen, although each point on the screen receives only red, green, and blue light."
+    ],
+    "sample_assessment_strategy": [
+      "Listen to group and pair discussions and evaluate learning by assessment of group and individual reports.",
+      "Observe groups and pose questions to promote thinking.",
+      "Check understanding and progress towards the learning outcomes through assessment of products."
+    ],
+    "ict_support": "The learner can use ICT to display what occurs during refraction and dispersion.",
+    "periods": 18,
+    "note": [
+      "Numerical problems involving real and apparent depth should not be included.",
+      "Variety of experiments involving glass block are recommended."
+    ]
+  },
+  {
+    "class": "Senior 3",
+    "term": "2",
+    "theme": "Light",
+    "topic": "Lenses and Optical Instruments",
+    "competency": "The learner should be able to understand that lenses refract light to form images and these lenses can be applied in different optical instruments.",
+    "learning_outcomes": [
+      {
+        "description": "know the properties of converging and diverging lenses, and how they are used in everyday life (k, u, s)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "understand how lenses are used in optical systems such as the magnifying glass, correcting sight in the human eye and in camera lenses (k, u, v/a)",
+        "assessment_type": ["observation", "evaluation of products"]
+      }
+    ],
+    "suggested_learning_activities": [
+      "In groups, learners: investigate and report on how converging lenses focus light from a distant object and determine the focal length of a convex lens, draw and present ray diagrams to show the effects of converging and diverging lenses on parallel rays of light, determine focal length of convex lens, and make reports, report on how lenses are used in optical instruments such as the magnifying glass, camera, microscope, and telescope",
+      "In pairs, learners research and explain in a presentation: the optical properties of both converging and diverging lenses using the terms: principal axis, principal focus, and focal length, the structure and function of the human eye [link with Biology], the use of lenses in correcting eye defects"
+    ],
+    "sample_assessment_strategy": [
+      "Observe and listen to learners as they research on lenses and discuss the applications. Evaluate and promote progress towards the learning outcomes.",
+      "Check understanding through assessment of quality of reports, diagrams and presentations; taking opportunities to further develop and deepen learning."
+    ],
+    "periods": 18,
+    "note": [
+      "Details on the operation of a projector, compound microscope, and telescopes should be left out.",
+      "Details of how photographs are processed in lens cameras are not required.",
+      "The lens formula should be left out."
+    ]
+  },
+  {
+    "class": "Senior 3",
+    "term": "2",
+    "theme": "Waves",
+    "topic": "General Wave Properties",
+    "competency": "The learner should be able to investigate the properties of transverse and longitudinal wave forms and explain how waves transmit energy.",
+    "learning_outcomes": [
+      {
+        "description": "understand that energy is transferred by waves, and these may be transverse or longitudinal (k, u)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "know and use the relationship between velocity, frequency, and wavelength (k, s)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "understand the propagation, properties, and uses of electromagnetic waves, and that white light is a mixture of frequencies but that light from a laser is a single frequency (k, u, v/a)",
+        "assessment_type": ["observation", "evaluation of products"]
+      }
+    ],
+    "suggested_learning_activities": [
+      "In pairs, learners research and present on: how waves transfer energy, the basic features of waves (e.g. amplitude, wavelength, frequency, and period); examples of waves as mechanical and electromagnetic, transverse and longitudinal, progressive and stationary",
+      "In groups, learners use a ripple tank to investigate the nature of transverse and longitudinal waves, present their findings and use the equation: velocity = wavelength x frequency to solve simple numerical problems.",
+      "In pairs, learners research and explain: the propagation and properties of electromagnetic waves and their applications, the nature of white light and light from a laser and its uses, the effects of over-exposure to ultraviolet (UV) and other forms of high frequency electromagnetic radiation, the production, applications, and effects of X-rays as a form of electromagnetic waves"
+    ],
+    "sample_assessment_strategy": [
+      "Listen to group and pair discussions and ask probing questions to promote critical thinking.",
+      "Observe group and pair work to gauge understanding, and intervene to offer guidance.",
+      "Evaluate quality of learning and progress towards learning outcomes through assessment of products."
+    ],
+    "ict_support": "The learner can use ICT to show how waves are generated and the features of waves",
+    "periods": 16
+  },
+  {
+    "class": "Senior 3",
+    "term": "2",
+    "theme": "Waves",
+    "topic": "Sound Waves",
+    "competency": "The learner should be able to describe the nature of sound waves and how they are transmitted by vibrations in a medium.",
+    "learning_outcomes": [
+      {
+        "description": "understand that sound is an example of a wave form that requires a medium through which to travel, and determine its velocity in air by the echo method (k, s)",
+        "assessment_type": ["observation", "evaluation of products"]
+      }
+    ],
+    "suggested_learning_activities": [
+      "In pairs, learners plan, carry out and report on investigations, using tuning forks to: show how sound is produced as a form of energy, making observations relating to vibrations, loudness, and pitch, explore the transmission of sound through air, water and different solids, explaining transmission in terms of density and particle theory",
+      "In groups, learners plan, carry out and report on investigations to find the velocity of sound in air over 50+ metres, using the echo method, and explain the reasons for the outcomes."
+    ],
+    "sample_assessment_strategy": [
+      "Observe and listen to pairs and groups engaged in investigations; posing questions to ensure understanding and the correct use of terms.",
+      "Evaluate quality of learning and progress towards the learning outcomes through assessment of investigation reports."
+    ],
+    "periods": 14,
+    "note": "The concept of resonance and vibrations in strings and pipes should be left out."
+  },
+  {
+    "class": "Senior 3",
+    "term": "3",
+    "theme": "Heat",
+    "topic": "Heat Quantities and Vapours",
+    "competency": "The learner should be able to explain heat capacity and latent heat, and know common applications.",
+    "learning_outcomes": [
+      {
+        "description": "understand and use the concepts of heat capacity and latent heat (k, u, s)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "know and explain the implications of the high values of the specific latent heat and the specific heat capacity of water (k, u)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "carry out calculations and investigations on specific heat capacity and specific latent heat (u, s)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "understand the concept of latent heat and change of state, and use them to explain melting and boiling point (u, s)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "understand the meaning of saturated and unsaturated vapours, saturated vapour pressure, and how these terms relate to boiling and evaporation (u)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "appreciate the cooling effect of evaporation and how this contributes to maintaining constant body temperature (k, u, s, v/a)",
+        "assessment_type": ["observation", "evaluation of products"]
+      }
+    ],
+    "suggested_learning_activities": [
+      "In groups, learners plan, carry out and report on an investigation to find the effect of heat energy on the temperature of different materials of the same mass and explain heat capacity.",
+      "In pairs, learners research, discuss and explain in presentations/posters: the applications and implications of the high specific latent heat and heat capacity of water, the role that oceans play in global temperature regulation, the loss or gain of heat when a material changes state in terms of the particle theory, the origins of the energy in a storm, why land and sea heat up and cool at different rates and the implications for the direction of sea breezes at different times of day",
+      "In groups, learners plan, carry out and report on an investigation to find out how stearic acid changes with temperature and explain the findings in terms of the loss or gain of heat.",
+      "In pairs, learners research and report on the total heat energy required to convert ice to steam, draw the heating curve and explain: the specific latent heat of fusion of ice, and the application of latent heat in refrigerators",
+      "In pairs, learners research the difference between saturated and unsaturated vapour, review prior learning and explain in a report: boiling and evaporation in terms of particle theory, how perspiring maintains constant body temperature in mammals, why water boils at a temperature less than 100 0C at the top of a mountain, how a pressure cooker works."
+    ],
+    "sample_assessment_strategy": [
+      "Listen to group and pair discussions and ask probing questions to check understanding about the nature of heat changes and promote critical thinking.",
+      "Observe learners' engagement in activities and intervene to avoid misconceptions.",
+      "Evaluate quality of learning through assessment of reports to ensure learners gain expected knowledge, understanding, and skills, and make progress towards the learning outcomes."
+    ],
+    "ict_support": "The learner can use an online simulation to investigate the effect of temperature on materials and vapours.",
+    "periods": 20,
+    "note": ["Determination of heat quantities should only be limited to the method of mixtures."]
+  },
+  {
+    "class": "Senior 3",
+    "term": "3",
+    "theme": "Earth and Space Physics",
+    "topic": "Stars and Galaxies",
+    "competency": "The learner should be able to understand the life-cycle of stars and the source of their energy.",
+    "learning_outcomes": [
+      {
+        "description": "know the source of energy in stars and appreciate the importance of the energy produced by the sun to the people on Earth (k, u)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "appreciate that stars vary in colour and brightness (u)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "know that stars have life cycles and that the fate of stars (white dwarfs, neutron stars and black holes) depends on their initial size (k, u)",
+        "assessment_type": ["observation", "evaluation of products"]
+      }
+    ],
+    "suggested_learning_activities": [
+      "In pairs, learners research and explain in a diagram: how the sun produces the energy needed for life to survive, that the sun is a relatively small star which will eventually become a red giant, and then a white dwarf, the approximate amount of energy produced by the sun per second, the proportion of the sun's energy reaching the Earth's surface and the proportion of that which is captured for photosynthesis",
+      "In pairs, learners research, explain, and report on: the variation in colour and brightness of stars in the Milky Way in terms of their size and distance from Earth, the different stages in the life cycle of a star, how the nuclear reactions that provide the energy in stars change as they grow older, and that they get hotter, what neutron stars and black holes are and how they were formed, what a supernova is and how it arises"
+    ],
+    "sample_assessment_strategy": [
+      "Listen to learners as they research and discuss the nature of stars and the source of energy; posing questions to deepen learning and secure understanding.",
+      "Observe groups and intervene appropriately to guide their work.",
+      "Assess products to ensure all are making progress towards achievement of learning outcomes."
+    ],
+    "ict_support": "The learner can use Internet research to study the formation of stars and galaxies",
+    "periods": 14
+  },
+  {
+    "class": "Senior 3",
+    "term": "3",
+    "theme": "Earth and Space Physics",
+    "topic": "Satellites and Communication",
+    "competency": "The learner should be able to explain what artificial satellites are and how they are applied in space exploration and other fields.",
+    "learning_outcomes": [
+      {
+        "description": "understand what artificial satellites are and how we make use of them in research and in everyday life (u, s)",
+        "assessment_type": ["observation", "evaluation of products"]
+      },
+      {
+        "description": "appreciate the importance of space exploration (u, v/a)",
+        "assessment_type": ["observation", "evaluation of products"]
+      }
+    ],
+    "suggested_learning_activities": [
+      "In pairs, learners research and report on types of artificial satellite, particularly geostationary satellites and explain: how they are used in GPS navigation systems, the value of photographs such as those taken by the Hubble Space Telescope., the purpose of the International Space Station and its role in space exploration"
+    ],
+    "sample_assessment_strategy": [
+      "Observe and listen to learners as they research and discuss satellites, offering guidance to deepen learning.",
+      "Assess learning through quality of reports and intervene appropriately to ensure that all are making progress towards achievement of learning outcomes."
+    ],
+    "ict_support": "The learner can use the Internet to obtain images of satellites and how they work.",
+    "periods": 14
+  }
+]

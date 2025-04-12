@@ -1,0 +1,558 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Assessments</h1>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createAssessmentModal">
+            Create New Assessment
+        </button>
+    </div>
+
+    <!-- Assessment List -->
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Subject</th>
+                    <th>Grade</th>
+                    <th>Duration</th>
+                    <th>Status</th>
+                    <th>Created</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for assessment in assessments %}
+                <tr>
+                    <td>{{ assessment.title }}</td>
+                    <td>{{ assessment.subject }}</td>
+                    <td>{{ assessment.grade_level }}</td>
+                    <td>{{ assessment.duration }}</td>
+                    <td><span class="badge bg-{{ 'success' if assessment.status == 'published' else 'warning' }}">
+                        {{ assessment.status|title }}
+                    </span></td>
+                    <td>{{ assessment.created_at.strftime('%Y-%m-%d') }}</td>
+                    <td>
+                        <div class="btn-group">
+                            <a href="{{ url_for('assessments.view_assessment', assessment_id=assessment.id) }}" 
+                               class="btn btn-sm btn-outline-primary">View</a>
+                            <a href="{{ url_for('assessments.edit_assessment', assessment_id=assessment.id) }}" 
+                               class="btn btn-sm btn-outline-secondary">Edit</a>
+                            <a href="{{ url_for('assessments.download_assessment', assessment_id=assessment.id) }}" 
+                               class="btn btn-sm btn-outline-info">
+                               <i class="bi bi-download"></i> Download
+                            </a>
+                            <a href="#" onclick="confirmDelete({{ assessment.id }})" 
+                               class="btn btn-sm btn-outline-danger">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Create Assessment Modal -->
+    <div class="modal fade" id="createAssessmentModal" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create New Assessment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <!-- Left side: Assessment Details -->
+                        <div class="col-md-4">
+                            <form id="assessmentForm" method="POST" action="{{ url_for('assessments.create_assessment') }}">
+                                <div class="mb-3">
+                                    <label for="assessment_type" class="form-label">Assessment Type</label>
+                                    <select class="form-select" id="assessment_type" name="assessment_type" onchange="updateTitle()">
+                                        <option value="">Select Type</option>
+                                        <option value="End of Topic">End of Topic Test</option>
+                                        <option value="Mid Term">Mid Term Exam</option>
+                                        <option value="End Term">End Term Exam</option>
+                                        <option value="Quiz">Quiz</option>
+                                        <option value="Assignment">Assignment</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="title" class="form-label">Title</label>
+                                    <input type="text" class="form-control" id="title" name="title" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="subject" class="form-label">Subject</label>
+                                    <select class="form-select" id="subject" name="subject" required onchange="loadGrades()">
+                                        <option value="">Select Subject</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="grade_level" class="form-label">Grade Level</label>
+                                    <select class="form-select" id="grade_level" name="grade_level" required onchange="loadTopics()">
+                                        <option value="">Select Grade</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="topic" class="form-label">Topic</label>
+                                    <select class="form-select" id="topic" name="topic" required>
+                                        <option value="">Select Topic</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="duration" class="form-label">Duration</label>
+                                    <select class="form-select" id="duration" name="duration" required>
+                                        <option value="">Select Duration</option>
+                                        <option value="40 minutes">40 minutes</option>
+                                        <option value="1 hour">1 hour</option>
+                                        <option value="1 hour 30 minutes">1 hour 30 minutes</option>
+                                        <option value="2 hours">2 hours</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Right side: Question Bank -->
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h6 class="mb-0">Question Bank</h6>
+                                        <div class="input-group w-50">
+                                            <input type="text" class="form-control" id="searchQuestions" 
+                                                   placeholder="Search questions...">
+                                            <button class="btn btn-outline-secondary" type="button" onclick="searchQuestions()">
+                                                <i class="bi bi-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <div class="btn-group btn-group-sm">
+                                            <button type="button" class="btn btn-outline-secondary" onclick="filterDifficulty('easy')">Easy</button>
+                                            <button type="button" class="btn btn-outline-secondary" onclick="filterDifficulty('medium')">Medium</button>
+                                            <button type="button" class="btn btn-outline-secondary" onclick="filterDifficulty('hard')">Hard</button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div id="questionsList" class="list-group" style="max-height: 400px; overflow-y: auto;">
+                                        <!-- Questions will be loaded here -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-3">
+                                <h6>Selected Questions</h6>
+                                <div id="selectedQuestions" class="list-group">
+                                    <!-- Selected questions will appear here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" onclick="generateVariations()">
+                        <i class="bi bi-magic"></i> Generate Variations
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="createAssessment()">
+                        Create Assessment
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+let selectedQuestions = [];
+
+document.addEventListener('DOMContentLoaded', loadSubjects);
+
+async function loadSubjects() {
+    try {
+        const response = await fetch("{{ url_for('questions.get_subjects') }}");
+        if (!response.ok) throw new Error('Failed to load subjects');
+        const data = await response.json();
+        
+        const subjectSelect = document.getElementById('subject');
+        subjectSelect.innerHTML = '<option value="">Select Subject</option>';
+        data.subjects.forEach(subject => {
+            subjectSelect.innerHTML += `<option value="${subject}">${subject}</option>`;
+        });
+    } catch (error) {
+        console.error('Error loading subjects:', error);
+    }
+}
+
+async function loadGrades() {
+    const subject = document.getElementById('subject').value;
+    if (!subject) return;
+    
+    try {
+        const response = await fetch(`{{ url_for('questions.get_grades', subject='') }}${subject}`);
+        if (!response.ok) throw new Error('Failed to load grades');
+        const data = await response.json();
+        
+        const gradeSelect = document.getElementById('grade_level');
+        gradeSelect.innerHTML = '<option value="">Select Grade</option>';
+        data.grades.forEach(grade => {
+            gradeSelect.innerHTML += `<option value="${grade}">${grade}</option>`;
+        });
+        
+        // Clear topics when grade changes
+        document.getElementById('topic').innerHTML = '<option value="">Select Topic</option>';
+    } catch (error) {
+        console.error('Error loading grades:', error);
+    }
+}
+
+async function loadTopics() {
+    const subject = document.getElementById('subject').value;
+    const grade = document.getElementById('grade_level').value;
+    
+    if (!subject || !grade) return;
+    
+    try {
+        const response = await fetch(`{{ url_for('questions.get_topics', subject='', grade='') }}${subject}/${grade}`);
+        if (!response.ok) throw new Error('Failed to load topics');
+        const data = await response.json();
+        
+        const topicSelect = document.getElementById('topic');
+        topicSelect.innerHTML = '<option value="">Select Topic</option>';
+        data.topics.forEach(topic => {
+            topicSelect.innerHTML += `<option value="${topic}">${topic}</option>`;
+        });
+        
+        // Load questions whenever filters change
+        loadQuestions();
+    } catch (error) {
+        console.error('Error loading topics:', error);
+    }
+}
+
+async function loadQuestions() {
+    const subject = document.getElementById('subject').value;
+    const grade = document.getElementById('grade_level').value;
+    const topic = document.getElementById('topic').value;
+    
+    try {
+        const queryParams = new URLSearchParams({
+            subject: subject || '',
+            grade_level: grade || '',
+            topic: topic || ''
+        });
+        
+        const response = await fetch(`{{ url_for('questions.filter_questions') }}?${queryParams}`);
+        if (!response.ok) throw new Error('Failed to load questions');
+        const questions = await response.json();
+        
+        const questionsList = document.getElementById('questionsList');
+        questionsList.innerHTML = questions.map(q => `
+            <div class="list-group-item">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div class="me-3 flex-grow-1">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" 
+                                   value="${q.id}" 
+                                   onchange="toggleQuestion(${q.id})"
+                                   ${selectedQuestions.some(sq => sq.id === q.id) ? 'checked' : ''}>
+                            <label class="form-check-label">
+                                <strong>${q.content}</strong>
+                                ${q.options ? `
+                                <div class="ms-4 mt-2">
+                                    ${q.options.map((opt, index) => `
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" disabled 
+                                                   ${opt.is_correct ? 'checked' : ''}>
+                                            <label class="form-check-label">
+                                                ${opt.option_text}
+                                            </label>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                                ` : ''}
+                                ${q.solution ? `
+                                <div class="mt-2 text-muted">
+                                    <small><strong>Solution:</strong> ${q.solution}</small>
+                                </div>
+                                ` : ''}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="ms-2 text-end">
+                        <span class="badge bg-${getDifficultyColor(q.difficulty)}">${q.difficulty}</span>
+                        <div class="mt-1">
+                            <small class="text-muted">${q.question_type}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    } catch (error) {
+        console.error('Error loading questions:', error);
+        questionsList.innerHTML = '<div class="alert alert-danger">Failed to load questions</div>';
+    }
+}
+
+function getDifficultyColor(difficulty) {
+    switch(difficulty.toLowerCase()) {
+        case 'easy': return 'success';
+        case 'medium': return 'warning';
+        case 'hard': return 'danger';
+        default: return 'secondary';
+    }
+}
+
+function toggleQuestion(questionId) {
+    const checkbox = document.querySelector(`input[value="${questionId}"]`);
+    const questionElement = checkbox.closest('.list-group-item');
+    const content = questionElement.querySelector('.form-check-label').innerHTML;
+    const difficulty = questionElement.querySelector('.badge').textContent;
+    const questionType = questionElement.querySelector('.text-muted').textContent;
+    
+    if (checkbox.checked) {
+        selectedQuestions.push({
+            id: questionId,
+            content: content,
+            difficulty: difficulty,
+            question_type: questionType
+        });
+    } else {
+        const index = selectedQuestions.findIndex(q => q.id === questionId);
+        if (index !== -1) {
+            selectedQuestions.splice(index, 1);
+        }
+    }
+    
+    updateSelectedQuestionsList();
+}
+
+function updateSelectedQuestionsList() {
+    const selectedQuestionsDiv = document.getElementById('selectedQuestions');
+    selectedQuestionsDiv.innerHTML = selectedQuestions.map((q, index) => `
+        <div class="list-group-item">
+            <div class="d-flex justify-content-between align-items-start">
+                <div class="me-3 flex-grow-1">
+                    <span class="badge bg-primary me-2">${index + 1}</span>
+                    <div class="mt-2">${q.content}</div>
+                </div>
+                <div class="ms-2">
+                    <span class="badge bg-${getDifficultyColor(q.difficulty)} mb-2">${q.difficulty}</span>
+                    <div>
+                        <button class="btn btn-sm btn-outline-primary me-1" onclick="modifyQuestion(${q.id})">
+                            <i class="bi bi-magic"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="removeQuestion(${q.id})">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function removeQuestion(questionId) {
+    const index = selectedQuestions.findIndex(q => q.id === questionId);
+    if (index !== -1) {
+        selectedQuestions.splice(index, 1);
+        updateSelectedQuestionsList();
+        // Uncheck the question in the question bank
+        const checkbox = document.querySelector(`input[value="${questionId}"]`);
+        if (checkbox) checkbox.checked = false;
+    }
+}
+
+async function modifyQuestion(questionId) {
+    const question = selectedQuestions.find(q => q.id === questionId);
+    if (!question) return;
+
+    try {
+        const prompt = `Modify this question while maintaining its difficulty level (${question.difficulty}): ${question.content}`;
+        const response = await fetch('/api/generate-variation', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ prompt: prompt })
+        });
+
+        if (!response.ok) throw new Error('Failed to generate variation');
+        
+        const data = await response.json();
+        question.content = data.variation;
+        updateSelectedQuestionsList();
+    } catch (error) {
+        console.error('Error generating variation:', error);
+        alert('Failed to generate question variation. Please try again.');
+    }
+}
+
+async function generateVariations() {
+    const selectedIds = selectedQuestions.map(q => q.id);
+    if (selectedIds.length === 0) {
+        alert('Please select at least one question first');
+        return;
+    }
+    
+    try {
+        for (const question of selectedQuestions) {
+            const response = await fetch('{{ url_for("questions.generate_variations") }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    content: question.content,
+                    subject: document.getElementById('subject').value,
+                    topic: document.getElementById('topic').value,
+                    question_type: 'long_answer' // Add default question type if not available
+                })
+            });
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            console.log("Received variations:", data); // Debug log
+            
+            if (data.variations && Array.isArray(data.variations)) {
+                data.variations.forEach(variation => {
+                    const questionsList = document.getElementById('questionsList');
+                    const newQuestion = createQuestionElement(variation);
+                    questionsList.insertBefore(newQuestion, questionsList.firstChild);
+                });
+            } else {
+                throw new Error('Invalid variation data received');
+            }
+        }
+        // Show success message
+        alert('Variations generated successfully!');
+    } catch (error) {
+        console.error('Error generating variations:', error);
+        alert(`Error generating variations: ${error.message}`);
+    }
+}
+
+function createQuestionElement(variation) {
+    const div = document.createElement('div');
+    div.className = 'list-group-item';
+    div.innerHTML = `
+        <div class="d-flex justify-content-between align-items-start">
+            <div class="me-3 flex-grow-1">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" 
+                           value="${Date.now()}" 
+                           onchange="toggleQuestion(this.value)">
+                    <label class="form-check-label">
+                        <strong>${variation.question_text}</strong>
+                        ${variation.solution ? `
+                        <div class="mt-2 text-muted">
+                            <small><strong>Solution:</strong> ${variation.solution}</small>
+                        </div>
+                        ` : ''}
+                    </label>
+                </div>
+            </div>
+            <div class="ms-2 text-end">
+                <span class="badge bg-info">Variation</span>
+            </div>
+        </div>
+    `;
+    return div;
+}
+
+async function createAssessment() {
+    const form = document.getElementById('assessmentForm');
+    if (!form) {
+        alert('Assessment form not found');
+        return;
+    }
+
+    if (selectedQuestions.length === 0) {
+        alert('Please select at least one question');
+        return;
+    }
+
+    try {
+        // Create FormData object
+        const formData = new FormData(form);
+        
+        // Add selected questions data
+        formData.append('questions', JSON.stringify(selectedQuestions));
+
+        const response = await fetch(form.action, {  // Use the form's action URL
+            method: 'POST',
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to create assessment');
+        }
+
+        const result = await response.json();
+        if (result.success) {
+            window.location.href = result.redirect_url;
+        } else {
+            throw new Error(result.message || 'Failed to create assessment');
+        }
+    } catch (error) {
+        console.error('Error creating assessment:', error);
+        alert('Error creating assessment: ' + error.message);
+    }
+}
+
+function searchQuestions() {
+    const searchTerm = document.getElementById('searchQuestions').value.toLowerCase();
+    const questionItems = document.querySelectorAll('#questionsList .list-group-item');
+    
+    questionItems.forEach(item => {
+        const questionText = item.querySelector('.form-check-label').textContent.toLowerCase();
+        item.style.display = questionText.includes(searchTerm) ? '' : 'none';
+    });
+}
+
+function filterDifficulty(level) {
+    const questionItems = document.querySelectorAll('#questionsList .list-group-item');
+    
+    questionItems.forEach(item => {
+        const difficulty = item.querySelector('.badge').textContent.toLowerCase();
+        item.style.display = level === 'all' || difficulty === level ? '' : 'none';
+    });
+}
+
+function updateTitle() {
+    const typeSelect = document.getElementById('assessment_type');
+    const titleInput = document.getElementById('title');
+    const subject = '{{ current_user.subject }}'; // Get from user profile
+    
+    if (typeSelect.value) {
+        titleInput.value = `${typeSelect.value} - ${subject}`;
+    }
+}
+
+function confirmDelete(assessmentId) {
+    if (confirm("Are you sure you want to delete this assessment? Original questions will remain in the question bank, but all variations will be deleted.")) {
+        window.location.href = `/assessment/${assessmentId}/delete`;
+    }
+}
+
+// Add event listeners for filter changes
+document.addEventListener('DOMContentLoaded', function() {
+    ['subject', 'grade_level', 'topic'].forEach(id => {
+        document.getElementById(id)?.addEventListener('change', loadQuestions);
+    });
+    
+    document.getElementById('searchQuestions')?.addEventListener('input', searchQuestions);
+});
+</script>
+{% endblock %} 

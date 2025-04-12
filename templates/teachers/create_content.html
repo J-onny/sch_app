@@ -1,0 +1,283 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">Create Teaching Content</h4>
+                </div>
+                <div class="card-body">
+                    <form id="contentForm">
+                        <!-- Content Type Selection -->
+                        <div class="mb-4">
+                            <label class="form-label">Select Content Type</label>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <div class="content-type-card" data-type="lesson">
+                                        <i class="bi bi-book"></i>
+                                        <h6>Lesson Content</h6>
+                                        <small>Full lesson materials</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="content-type-card" data-type="visual">
+                                        <i class="bi bi-diagram-2"></i>
+                                        <h6>Visual Aids</h6>
+                                        <small>Diagrams & charts</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="content-type-card" data-type="activity">
+                                        <i class="bi bi-people"></i>
+                                        <h6>Activities</h6>
+                                        <small>Class exercises</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Basic Details -->
+                        <div class="mb-3">
+                            <label class="form-label">Subject</label>
+                            <select class="form-select" name="subject" required>
+                                <option value="">Select Subject</option>
+                                <option value="Physics">Physics</option>
+                                <option value="Mathematics">Mathematics</option>
+                                <option value="Chemistry">Chemistry</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Topic</label>
+                            <input type="text" class="form-control" name="topic" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Grade Level</label>
+                            <select class="form-select" name="grade_level" required>
+                                <!-- Add your grade levels -->
+                                <option value="">Select Grade</option>
+                                <option value="S.1">Senior 1</option>
+                                <option value="S.2">Senior 2</option>
+                                <option value="S.3">Senior 3</option>
+                                <option value="S.4">Senior 4</option>
+                                <option value="S.5">Senior 5</option>
+                                <option value="S.6">Senior 6</option>
+                            </select>
+                        </div>
+
+                        <!-- Dynamic Options Based on Content Type -->
+                        <div id="dynamicOptions" class="mb-3">
+                            <!-- Will be populated based on selection -->
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            Generate Content
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.content-type-card {
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.content-type-card:hover {
+    border-color: #0d6efd;
+    background-color: #f8f9fa;
+}
+
+.content-type-card.selected {
+    border-color: #0d6efd;
+    background-color: #e7f1ff;
+}
+
+.content-type-card i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: #0d6efd;
+}
+
+.content-type-card h6 {
+    margin-bottom: 0.25rem;
+}
+
+.content-type-card small {
+    color: #6c757d;
+}
+</style>
+
+<script>
+document.querySelectorAll('.content-type-card').forEach(card => {
+    card.addEventListener('click', () => {
+        document.querySelectorAll('.content-type-card').forEach(c => 
+            c.classList.remove('selected'));
+        card.classList.add('selected');
+        updateDynamicOptions(card.dataset.type);
+    });
+});
+
+function updateDynamicOptions(type) {
+    const optionsDiv = document.getElementById('dynamicOptions');
+    let html = '';
+    
+    switch(type) {
+        case 'lesson':
+            html = `
+                <div class="lesson-options">
+                    <div class="mb-3">
+                        <label class="form-label">Lesson Duration (minutes)</label>
+                        <input type="number" class="form-control" name="duration" min="30" max="120" value="40">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Content Components</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="include_introduction" id="include_introduction" checked>
+                            <label class="form-check-label" for="include_introduction">Introduction/Prior Knowledge</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="include_objectives" id="include_objectives" checked>
+                            <label class="form-check-label" for="include_objectives">Learning Objectives</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="include_examples" id="include_examples" checked>
+                            <label class="form-check-label" for="include_examples">Examples & Illustrations</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="include_activities" id="include_activities" checked>
+                            <label class="form-check-label" for="include_activities">Student Activities</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="include_assessment" id="include_assessment" checked>
+                            <label class="form-check-label" for="include_assessment">Assessment Questions</label>
+                        </div>
+                    </div>
+                </div>`;
+            break;
+            
+        case 'visual':
+            html = `
+                <div class="visual-options">
+                    <div class="mb-3">
+                        <label class="form-label">Visual Type</label>
+                        <select class="form-select" name="visual_type" required>
+                            <option value="diagram">Diagram</option>
+                            <option value="flowchart">Flowchart</option>
+                            <option value="graph">Graph</option>
+                            <option value="concept_map">Concept Map</option>
+                            <option value="infographic">Infographic</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Complexity Level</label>
+                        <select class="form-select" name="complexity" required>
+                            <option value="basic">Basic - Single concept</option>
+                            <option value="intermediate">Intermediate - Multiple related concepts</option>
+                            <option value="advanced">Advanced - Complex relationships</option>
+                        </select>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" name="include_labels" id="include_labels" checked>
+                        <label class="form-check-label" for="include_labels">Include detailed labels and annotations</label>
+                    </div>
+                </div>`;
+            break;
+            
+        case 'activity':
+            html = `
+                <div class="activity-options">
+                    <div class="mb-3">
+                        <label class="form-label">Activity Type</label>
+                        <select class="form-select" name="activity_type" required>
+                            <option value="individual">Individual Exercise</option>
+                            <option value="group">Group Work</option>
+                            <option value="experiment">Laboratory Experiment</option>
+                            <option value="project">Mini Project</option>
+                            <option value="discussion">Guided Discussion</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Duration (minutes)</label>
+                        <input type="number" class="form-control" name="activity_duration" min="10" max="60" value="20">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Components to Include</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="include_objectives" id="activity_objectives" checked>
+                            <label class="form-check-label" for="activity_objectives">Learning Objectives</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="include_materials" id="activity_materials" checked>
+                            <label class="form-check-label" for="activity_materials">Required Materials</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="include_steps" id="activity_steps" checked>
+                            <label class="form-check-label" for="activity_steps">Step-by-step Instructions</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="include_assessment" id="activity_assessment" checked>
+                            <label class="form-check-label" for="activity_assessment">Assessment Criteria</label>
+                        </div>
+                    </div>
+                </div>`;
+            break;
+    }
+    
+    optionsDiv.innerHTML = html;
+}
+
+// Add form submission handler
+document.getElementById('contentForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const selectedCard = document.querySelector('.content-type-card.selected');
+    
+    if (!selectedCard) {
+        alert('Please select a content type');
+        return;
+    }
+    
+    formData.append('content_type', selectedCard.dataset.type);
+    
+    try {
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Generating...';
+        
+        const response = await fetch('/teaching/generate-content', {
+            method: 'POST',
+            body: formData
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const result = await response.json();
+        if (result.success) {
+            window.location.href = result.redirect_url;
+        } else {
+            throw new Error(result.error || 'Failed to generate content');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error generating content: ' + error.message);
+    } finally {
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Generate Content';
+    }
+});
+</script>
+{% endblock %} 

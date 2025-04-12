@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Create New Scheme of Work</h1>
+    <form method="POST">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+        </div>
+        <div class="mb-3">
+            <label for="subject" class="form-label">Subject</label>
+            <input type="text" class="form-control" id="subject" name="subject" required>
+        </div>
+        <div class="mb-3">
+            <label for="grade_level" class="form-label">Grade Level</label>
+            <input type="text" class="form-control" id="grade_level" name="grade_level" required>
+        </div>
+        <div class="mb-3">
+            <label for="term" class="form-label">Term</label>
+            <select class="form-control" id="term" name="term" required>
+                <option value="Term 1">Term 1</option>
+                <option value="Term 2">Term 2</option>
+                <option value="Term 3">Term 3</option>
+            </select>
+        </div>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="generate_topics" name="generate_topics">
+            <label class="form-check-label" for="generate_topics">
+                Generate topics using AI
+            </label>
+        </div>
+        <button type="submit" class="btn btn-primary">Create Scheme</button>
+    </form>
+</div>
+{% endblock %} 

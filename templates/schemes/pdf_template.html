@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        @page {
+            size: A4 landscape;
+            margin: 1cm;
+        }
+        body {
+            font-size: 10pt;
+            margin: 0;
+            padding: 0;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1em;
+        }
+        .table th, 
+        .table td {
+            border: 1px solid black;
+            padding: 4px;
+            font-size: 9pt;
+            vertical-align: top;
+        }
+        .table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        .scheme-header {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .scheme-header h1 {
+            font-size: 14pt;
+            margin: 10px 0;
+        }
+        .scheme-header h2 {
+            font-size: 12pt;
+            margin: 10px 0;
+        }
+        .metadata {
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
+        }
+        .metadata-left, .metadata-right {
+            width: 48%;
+        }
+        .metadata-right {
+            text-align: right;
+        }
+        .signatures {
+            margin-top: 50px;
+            page-break-inside: avoid;
+            display: flex;
+            justify-content: space-between;
+        }
+        .signature-block {
+            width: 30%;
+        }
+        .signature-block.center {
+            text-align: center;
+        }
+        .signature-block.right {
+            text-align: right;
+        }
+        .list-unstyled {
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="scheme-header">
+        <h1>SCHEME OF WORK FOR A COMPETENTENCY-BASED CURRICULUM</h1>
+        <h2>SCHOOL: {{ current_user.school|upper }}</h2>
+    </div>
+
+    <div class="metadata">
+        <div class="metadata-left">
+            <p><strong>NAME OF TEACHER:</strong> {{ current_user.name|upper }}</p>
+            <p><strong>SUBJECT:</strong> {{ scheme.subject|upper }}</p>
+        </div>
+        <div class="metadata-right">
+            <p><strong>CLASS:</strong> {{ scheme.grade_level }}</p>
+            <p><strong>TERM:</strong> {{ scheme.term }} YEAR: {{ scheme.created_at.year }}</p>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>WEEK</th>
+                <th>PERIODS</th>
+                <th>THEME/TOPIC<br>SUB-TOPIC</th>
+                <th>COMPETENCY</th>
+                <th>LEARNING OUTCOMES</th>
+                <th>LEARNING ACTIVITIES</th>
+                <th>METHODOLOGY</th>
+                <th>TEACHING/LEARNING RESOURCES</th>
+                <th>REFERENCES</th>
+                <th>REMARKS</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for topic in scheme.topics|sort(attribute='order') %}
+            <tr>
+                <td>{{ topic.week }}</td>
+                <td></td>
+                <td>
+                    <strong>{{ topic.theme }}</strong><br>
+                    {{ topic.title }}<br>
+                    <em>{{ topic.sub_topic }}</em>
+                </td>
+                <td>{{ topic.competency }}</td>
+                <td>
+                    <ul class="list-unstyled">
+                    {% for objective in topic.learning_objectives|from_json %}
+                        <li>{{ objective }}</li>
+                    {% endfor %}
+                    </ul>
+                </td>
+                <td>
+                    <ul class="list-unstyled">
+                    {% for activity in topic.learning_activities|from_json %}
+                        <li>{{ activity }}</li>
+                    {% endfor %}
+                    </ul>
+                </td>
+                <td>
+                    <ul class="list-unstyled">
+                    {% for method in topic.teaching_methods|from_json %}
+                        <li>{{ method }}</li>
+                    {% endfor %}
+                    </ul>
+                </td>
+                <td>
+                    <ul class="list-unstyled">
+                    {% for resource in topic.resources|from_json %}
+                        <li>{{ resource }}</li>
+                    {% endfor %}
+                    </ul>
+                </td>
+                <td>
+                    <ul class="list-unstyled">
+                    {% for ref in topic.references|from_json %}
+                        <li>{{ ref }}</li>
+                    {% endfor %}
+                    </ul>
+                </td>
+                <td>{{ topic.remarks }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="signatures">
+        <div class="signature-block">
+            <p>Signed: _________________________</p>
+            <p>Director of Studies</p>
+            <p>Date: _________________________</p>
+        </div>
+        <div class="signature-block center">
+        </div>
+        <div class="signature-block right">
+            <p>Signed: _________________________</p>
+            <p>Head of Department</p>
+            <p>Date: _________________________</p>
+        </div>
+    </div>
+</body>
+</html> 

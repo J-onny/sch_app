@@ -1,0 +1,237 @@
+<div class="activity-content">
+    <!-- Title and Type -->
+    <div class="mb-4">
+        <h3>{{ content.content.title }}</h3>
+        <span class="badge bg-primary">{{ content.content.type|title }}</span>
+        <span class="badge bg-secondary">{{ content.content.duration }}</span>
+    </div>
+
+    <!-- Objectives -->
+    {% if content.content.objectives %}
+    <section class="mb-4">
+        <h4>Learning Objectives</h4>
+        <div class="card">
+            <div class="card-body">
+                <ul class="mb-0">
+                    {% for objective in content.content.objectives %}
+                        <li>{{ objective }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- Materials -->
+    {% if content.content.materials %}
+    <section class="mb-4">
+        <h4>Required Materials</h4>
+        <div class="card">
+            <div class="card-body">
+                <ul class="mb-0">
+                    {% for material in content.content.materials %}
+                        <li>{{ material }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- Setup -->
+    {% if content.content.setup %}
+    <section class="mb-4">
+        <h4>Setup Instructions</h4>
+        <div class="card">
+            <div class="card-body">
+                <h5>Preparation</h5>
+                <ul>
+                    {% for step in content.content.setup.preparation %}
+                        <li>{{ step }}</li>
+                    {% endfor %}
+                </ul>
+
+                <h5>Classroom Arrangement</h5>
+                <p>{{ content.content.setup.classroom_arrangement }}</p>
+
+                {% if content.content.setup.safety_considerations %}
+                <div class="alert alert-warning">
+                    <h5>Safety Considerations</h5>
+                    <ul class="mb-0">
+                        {% for safety in content.content.setup.safety_considerations %}
+                            <li>{{ safety }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- Procedure -->
+    {% if content.content.procedure %}
+    <section class="mb-4">
+        <h4>Procedure</h4>
+        <div class="card">
+            <div class="card-body">
+                <div class="alert alert-info">
+                    {{ content.content.procedure.introduction }}
+                </div>
+
+                <h5>Steps</h5>
+                <div class="timeline">
+                    {% for i in range(content.content.procedure.steps|length) %}
+                    <div class="timeline-item">
+                        <div class="timeline-step">{{ i + 1 }}</div>
+                        <div class="timeline-content">
+                            <p>{{ content.content.procedure.steps[i] }}</p>
+                            {% if content.content.procedure.timing[i] %}
+                            <small class="text-muted">{{ content.content.procedure.timing[i] }}</small>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- Student Instructions -->
+    {% if content.content.student_instructions %}
+    <section class="mb-4">
+        <h4>Student Instructions</h4>
+        <div class="card">
+            <div class="card-body">
+                <div class="mb-3">
+                    <h5>Task Description</h5>
+                    <p>{{ content.content.student_instructions.task_description }}</p>
+                </div>
+
+                <div class="mb-3">
+                    <h5>Steps to Follow</h5>
+                    <ol>
+                        {% for step in content.content.student_instructions.steps %}
+                            <li>{{ step }}</li>
+                        {% endfor %}
+                    </ol>
+                </div>
+
+                <div>
+                    <h5>Expected Deliverables</h5>
+                    <ul>
+                        {% for deliverable in content.content.student_instructions.deliverables %}
+                            <li>{{ deliverable }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- Assessment -->
+    {% if content.content.assessment %}
+    <section class="mb-4">
+        <h4>Assessment</h4>
+        <div class="card">
+            <div class="card-body">
+                <h5>Assessment Criteria</h5>
+                <ul class="mb-4">
+                    {% for criterion in content.content.assessment.criteria %}
+                        <li>{{ criterion }}</li>
+                    {% endfor %}
+                </ul>
+
+                <h5>Rubric</h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Criterion</th>
+                                <th>Levels</th>
+                                <th>Marks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in content.content.assessment.rubric %}
+                            <tr>
+                                <td>{{ item.criterion }}</td>
+                                <td>
+                                    <ul class="mb-0">
+                                        {% for level in item.levels %}
+                                            <li>{{ level }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </td>
+                                <td>{{ item.marks }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- Extensions and Troubleshooting -->
+    <section class="mb-4">
+        {% if content.content.extensions %}
+        <h4>Extension Activities</h4>
+        <div class="card mb-3">
+            <div class="card-body">
+                <ul class="mb-0">
+                    {% for extension in content.content.extensions %}
+                        <li>{{ extension }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if content.content.troubleshooting %}
+        <h4>Troubleshooting Guide</h4>
+        <div class="card">
+            <div class="card-body">
+                <ul class="mb-0">
+                    {% for issue in content.content.troubleshooting %}
+                        <li>{{ issue }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+    </section>
+</div>
+
+<style>
+.timeline {
+    position: relative;
+    padding: 20px 0;
+}
+
+.timeline-item {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.timeline-step {
+    width: 30px;
+    height: 30px;
+    background: #007bff;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-right: 15px;
+}
+
+.timeline-content {
+    flex-grow: 1;
+    padding-top: 3px;
+}
+</style> 
